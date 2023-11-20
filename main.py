@@ -31,4 +31,5 @@ def setup_window():
     # Start mainloop
     root.mainloop()
 
-setup_window()
+if __name__ == "__main__":
+    setup_window()
