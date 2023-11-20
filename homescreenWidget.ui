@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1024</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QPushButton" name="skylight4Button">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>430</y>
+     <width>161</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <pointsize>30</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: #E6C548; /* Choose your desired background color */
+    color: white; /* Choose your desired text color */
+    border: 1px solid #E6C548; /* Add a border for better visibility */
+    border-radius: 20px;
+    padding: 6px;
+}</string>
+   </property>
+   <property name="text">
+    <string>Skylight 4</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="allButton">
+   <property name="geometry">
+    <rect>
+     <x>790</x>
+     <y>430</y>
+     <width>161</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <pointsize>30</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: #E6C548; /* Choose your desired background color */
+    color: white; /* Choose your desired text color */
+    border: 1px solid #E6C548; /* Add a border for better visibility */
+    border-radius: 20px;
+    padding: 6px;
+}</string>
+   </property>
+   <property name="text">
+    <string>All</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="skylight2Button">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>250</y>
+     <width>161</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <pointsize>30</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: #E6C548; /* Choose your desired background color */
+    color: white; /* Choose your desired text color */
+    border: 1px solid #E6C548; /* Add a border for better visibility */
+    border-radius: 20px;
+    padding: 6px;
+}</string>
+   </property>
+   <property name="text">
+    <string>Skylight 2</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="skylight3Button">
+   <property name="geometry">
+    <rect>
+     <x>790</x>
+     <y>250</y>
+     <width>161</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <pointsize>30</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: #E6C548; /* Choose your desired background color */
+    color: white; /* Choose your desired text color */
+    border: 1px solid #E6C548; /* Add a border for better visibility */
+    border-radius: 20px;
+    padding: 6px;
+}</string>
+   </property>
+   <property name="text">
+    <string>Skylight 3</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="skylight5Button">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>430</y>
+     <width>161</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <pointsize>30</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: #E6C548; /* Choose your desired background color */
+    color: white; /* Choose your desired text color */
+    border: 1px solid #E6C548; /* Add a border for better visibility */
+    border-radius: 20px;
+    padding: 6px;
+}</string>
+   </property>
+   <property name="text">
+    <string>Skylight 5</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="skylight1Button">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>250</y>
+     <width>161</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <pointsize>30</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: #E6C548; /* Choose your desired background color */
+    color: white; /* Choose your desired text color */
+    border: 1px solid #E6C548; /* Add a border for better visibility */
+    border-radius: 20px;
+    padding: 6px;
+}</string>
+   </property>
+   <property name="text">
+    <string>Skylight 1</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
