@@ -260,6 +260,34 @@
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
+  <widget class="QPushButton" name="backButton">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>10</y>
+     <width>161</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <pointsize>36</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: #E6C548; /* Choose your desired background color */
+    color: white; /* Choose your desired text color */
+    border: 1px solid #E6C548; /* Add a border for better visibility */
+    border-radius: 20px;
+    padding: 6px;
+}</string>
+   </property>
+   <property name="text">
+    <string>&lt; Back</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
