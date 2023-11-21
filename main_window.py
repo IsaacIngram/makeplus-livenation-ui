@@ -3,40 +3,28 @@ from PyQt6.QtWidgets import QApplication, QMainWindow
 
 from light_control_widget import LightControlWidget
 from homescreen_widget import HomescreenWidget
+from navigation import Navigation
 
 class MainWindow(QMainWindow):
 
-    # Create all widgets used in stacked widget
-    light_control_widget: LightControlWidget
-    homescreen_widget: HomescreenWidget
+    navigation: Navigation
 
     def __init__(self):
         super().__init__()
         # Load UI file
         uic.loadUi('mainWindow.ui', self)
-        # Add homescreen widget
-        self.homescreen_widget = HomescreenWidget()
-        self.mainWidget.addWidget(self.homescreen_widget)
 
-        # Add light control widget
-        self.light_control_widget = LightControlWidget()
-        self.mainWidget.addWidget(self.light_control_widget)
+        # Create navigation with stacked widget
+        self.navigation = Navigation(self.mainWidget)
 
-        # Set navigation callback functions
-        self.homescreen_widget.skylight1Button.clicked.connect(lambda: self.set_page_control(1))
-        self.light_control_widget.backButton.clicked.connect(self.set_page_home)
+        # Create homescreen widget
+        homescreen_widget = HomescreenWidget(self.navigation)
+        self.navigation.add_page(homescreen_widget, "homescreen")
 
-    def set_page_home(self):
-        """
-        Switch to the homescreen widget
-        """
-        self.mainWidget.setCurrentIndex(0)
+        # Create light control widget
+        light_control_widget = LightControlWidget(self.navigation)
+        self.navigation.add_page(light_control_widget, "control")
 
-    def set_page_control(self, light_id):
-        """
-        Switch to the control widget
-        """
-        self.mainWidget.setCurrentIndex(1)
 
 if __name__ == '__main__':
     app = QApplication([])

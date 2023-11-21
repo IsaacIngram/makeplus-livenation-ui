@@ -41,16 +41,17 @@
   <widget class="QPushButton" name="closeBlackout">
    <property name="geometry">
     <rect>
-     <x>430</x>
-     <y>250</y>
-     <width>161</width>
-     <height>101</height>
+     <x>500</x>
+     <y>210</y>
+     <width>160</width>
+     <height>100</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Arial</family>
+     <family>Helvetica Neue</family>
      <pointsize>36</pointsize>
+     <bold>true</bold>
     </font>
    </property>
    <property name="styleSheet">
@@ -77,8 +78,9 @@
    </property>
    <property name="font">
     <font>
-     <family>Arial</family>
-     <pointsize>30</pointsize>
+     <family>Helvetica Neue</family>
+     <pointsize>28</pointsize>
+     <bold>true</bold>
     </font>
    </property>
    <property name="text">
@@ -88,16 +90,17 @@
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>390</x>
-     <y>50</y>
+     <x>460</x>
+     <y>10</y>
      <width>231</width>
      <height>51</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Arial</family>
+     <family>Helvetica Neue</family>
      <pointsize>48</pointsize>
+     <bold>true</bold>
     </font>
    </property>
    <property name="text">
@@ -110,16 +113,17 @@
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>710</x>
-     <y>50</y>
+     <x>780</x>
+     <y>10</y>
      <width>231</width>
      <height>51</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Arial</family>
+     <family>Helvetica Neue</family>
      <pointsize>48</pointsize>
+     <bold>true</bold>
     </font>
    </property>
    <property name="text">
@@ -135,16 +139,17 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>750</x>
-     <y>250</y>
-     <width>161</width>
-     <height>101</height>
+     <x>820</x>
+     <y>210</y>
+     <width>160</width>
+     <height>100</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Arial</family>
+     <family>Helvetica Neue</family>
      <pointsize>36</pointsize>
+     <bold>true</bold>
     </font>
    </property>
    <property name="styleSheet">
@@ -163,16 +168,17 @@
   <widget class="QPushButton" name="openBlackout">
    <property name="geometry">
     <rect>
-     <x>430</x>
-     <y>120</y>
-     <width>161</width>
-     <height>101</height>
+     <x>500</x>
+     <y>80</y>
+     <width>160</width>
+     <height>100</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Arial</family>
+     <family>Helvetica Neue</family>
      <pointsize>36</pointsize>
+     <bold>true</bold>
     </font>
    </property>
    <property name="styleSheet">
@@ -191,16 +197,17 @@
   <widget class="QPushButton" name="openDiffuse">
    <property name="geometry">
     <rect>
-     <x>750</x>
-     <y>120</y>
-     <width>161</width>
-     <height>101</height>
+     <x>820</x>
+     <y>80</y>
+     <width>160</width>
+     <height>100</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Arial</family>
+     <family>Helvetica Neue</family>
      <pointsize>36</pointsize>
+     <bold>true</bold>
     </font>
    </property>
    <property name="styleSheet">
@@ -227,8 +234,9 @@
    </property>
    <property name="font">
     <font>
-     <family>Arial</family>
-     <pointsize>30</pointsize>
+     <family>Helvetica Neue</family>
+     <pointsize>28</pointsize>
+     <bold>true</bold>
     </font>
    </property>
    <property name="text">
@@ -263,29 +271,50 @@
   <widget class="QPushButton" name="backButton">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>10</x>
      <y>10</y>
-     <width>161</width>
-     <height>101</height>
+     <width>81</width>
+     <height>71</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Arial</family>
-     <pointsize>36</pointsize>
+     <family>Helvetica Neue</family>
+     <pointsize>48</pointsize>
+     <bold>true</bold>
     </font>
    </property>
    <property name="styleSheet">
     <string notr="true">QPushButton {
-    background-color: #E6C548; /* Choose your desired background color */
-    color: white; /* Choose your desired text color */
-    border: 1px solid #E6C548; /* Add a border for better visibility */
+    background-color: transparent; /* Choose your desired background color */
+    color: #E6C548; /* Choose your desired text color */
+    border: 0px; /* Add a border for better visibility */
     border-radius: 20px;
     padding: 6px;
 }</string>
    </property>
    <property name="text">
-    <string>&lt; Back</string>
+    <string>&lt;-</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>340</y>
+     <width>221</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Helvetica Neue</family>
+     <pointsize>30</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Manual Control</string>
    </property>
   </widget>
  </widget>
