@@ -22,14 +22,20 @@ class MainWindow(QMainWindow):
         self.light_control_widget = LightControlWidget()
         self.mainWidget.addWidget(self.light_control_widget)
 
-        # Set callback functions
+        # Set navigation callback functions
         self.homescreen_widget.skylight1Button.clicked.connect(lambda: self.set_page_control(1))
         self.light_control_widget.backButton.clicked.connect(self.set_page_home)
 
     def set_page_home(self):
+        """
+        Switch to the homescreen widget
+        """
         self.mainWidget.setCurrentIndex(0)
 
     def set_page_control(self, light_id):
+        """
+        Switch to the control widget
+        """
         self.mainWidget.setCurrentIndex(1)
 
 if __name__ == '__main__':
