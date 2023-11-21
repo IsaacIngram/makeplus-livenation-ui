@@ -23,13 +23,13 @@ class MainWindow(QMainWindow):
         self.mainWidget.addWidget(self.light_control_widget)
 
         # Set callback functions
-        self.homescreen_widget.skylight1Button.clicked.connect(self.go_to_control)
-        self.light_control_widget.backButton.clicked.connect(self.go_home)
+        self.homescreen_widget.skylight1Button.clicked.connect(lambda: self.set_page_control(1))
+        self.light_control_widget.backButton.clicked.connect(self.set_page_home)
 
-    def go_home(self):
+    def set_page_home(self):
         self.mainWidget.setCurrentIndex(0)
 
-    def go_to_control(self):
+    def set_page_control(self, light_id):
         self.mainWidget.setCurrentIndex(1)
 
 if __name__ == '__main__':
