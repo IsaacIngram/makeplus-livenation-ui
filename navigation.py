@@ -44,7 +44,6 @@ class Navigation():
             print("ERROR HIT")
             return 1
         self.switch_to_page_widget(self.alias_map[alias])
-        print("SHOULD BE SWITCHED")
 
     def add_page(self, page: QWidget) -> int:
         """
