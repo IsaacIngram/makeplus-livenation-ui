@@ -1,5 +1,5 @@
 from PyQt6 import uic
-from PyQt6.QtWidgets import QWidget
+from PyQt6.QtWidgets import QWidget, QFrame, QVBoxLayout
 
 from tab_bar import TabBar
 from control_widget import ControlWidget
@@ -33,7 +33,7 @@ class ControlScreen(QWidget):
         Add a skylight to be controlled
         """
         new_skylight: ControlWidget = ControlWidget(id)
-        self.tab_bar.add_tab(new_skylight, name)
+        self.tab_bar.add_tab(id, new_skylight, name)
 
     def clear_skylights(self):
         """

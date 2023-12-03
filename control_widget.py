@@ -22,6 +22,15 @@ class ControlWidget(QWidget):
         # Set local variables
         self.id = skylight_id
 
+        self.setStyleSheet("""
+            ControlWidget {
+                background-color: white;
+                border-radius: 10px;
+                border: 2px solid #a0a0a0;
+                box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+            }
+        """)
+
         self.show()
 
         # Create switch

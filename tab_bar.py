@@ -36,7 +36,7 @@ class TabBar():
 
         self.navigation = Navigation(stackedWidget)
 
-    def add_tab(self, widget: QWidget, name: str):
+    def add_tab(self, id: int, widget: QWidget, name: str):
         """
         Add a tab to the tab bar
 
@@ -47,7 +47,7 @@ class TabBar():
         new_button = TabButton(name)
         self.tabs.addWidget(new_button)
         self.navigation.add_page(widget)
-        new_button.clicked.connect(lambda: self.navigation.switch_to_page_widget(widget))
+        new_button.clicked.connect(lambda: self.switch_to_tab(id, widget))
         
 
     def clear_tabs():
@@ -55,5 +55,16 @@ class TabBar():
         Clear all tabs
         """
         pass
+
+    def switch_to_tab(self, id: int, widget: QWidget):
+        for i in range(self.tabs.count()):
+            item = self.tabs.itemAt(i).widget()
+            if i == id and isinstance(item, TabButton):
+                item.set_active_style()
+                print("Set inactive")
+            elif isinstance(item, TabButton):
+                item.set_inactive_style()
+                print("Set inactive")
+        self.navigation.switch_to_page_widget(widget)
 
 
