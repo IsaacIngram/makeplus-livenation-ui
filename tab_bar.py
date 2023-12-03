@@ -54,17 +54,26 @@ class TabBar():
         """
         Clear all tabs
         """
+        #TODO implement
         pass
 
     def switch_to_tab(self, id: int, widget: QWidget):
+        """
+        Callback function to switch tabs
+
+        Params:
+        id (int): id of the tab to switch to
+        widget (QWidget): the widget the tab switches to
+        """
+        # Set the style of all tabs
         for i in range(self.tabs.count()):
             item = self.tabs.itemAt(i).widget()
+            # Only set one tab to the active style
             if i == id and isinstance(item, TabButton):
                 item.set_active_style()
-                print("Set inactive")
             elif isinstance(item, TabButton):
                 item.set_inactive_style()
-                print("Set inactive")
+        # Switch to the widget
         self.navigation.switch_to_page_widget(widget)
 
 
