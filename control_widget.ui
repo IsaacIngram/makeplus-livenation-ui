@@ -26,7 +26,11 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">
+        QWidget#controlWidget {
+            background-color: red;
+        }
+      </string>
   </property>
   <widget class="QLabel" name="label">
    <property name="geometry">

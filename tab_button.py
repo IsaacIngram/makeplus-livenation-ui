@@ -1,4 +1,5 @@
 from PyQt6.QtWidgets import QPushButton
+from PyQt6.QtGui import QFont
 
 
 class TabButton(QPushButton):
@@ -8,13 +9,14 @@ class TabButton(QPushButton):
         Create a new tab button
         """
         super().__init__(name, *args, **kwargs)
+        self.setFont(QFont("Live Nation Regular"))
         self.setStyleSheet("""
             QPushButton {
                 background-color: #FFFFFF;
                 color: black;
                 border: 1px solid #FFFFFF;
                 border-radius: 20px;
-                padding: 6px;
+                padding: 20px;
             }
         """)
 
@@ -25,17 +27,18 @@ class TabButton(QPushButton):
                 color: black;
                 border: 1px solid #FFFFFF;
                 border-radius: 20px;
-                padding: 6px;
+                padding: 20px;
             }
         """)
+        self.raise_()
 
     def set_inactive_style(self):
         self.setStyleSheet("""
             QPushButton {
-                background-color: #000000;
-                color: white;
-                border: 1px solid #000000;
+                background-color: transparent;
+                color: black;
+                border: 1px solid transparent;
                 border-radius: 20px;
-                padding: 6px;
+                padding: 20px;
             }
         """)

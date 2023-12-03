@@ -1,9 +1,26 @@
 from PyQt6 import uic
-from PyQt6.QtWidgets import QWidget, QFrame, QVBoxLayout
+from PyQt6.QtWidgets import QWidget, QGraphicsDropShadowEffect, QApplication, QStackedWidget, QVBoxLayout
+from PyQt6.QtGui import QColor
 
 from tab_bar import TabBar
 from control_widget import ControlWidget
 from navigation import Navigation
+
+class PrivateShadow(QWidget):
+    def __init__(self, inner_widget: QWidget, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        layout = QVBoxLayout(self)
+        layout.setContentsMargins(0, 0, 5, 5)
+
+        # Apply shadow effect to the right and bottom edges
+        shadow_effect = QGraphicsDropShadowEffect(self)
+        shadow_effect.setBlurRadius(20)
+        shadow_effect.setColor(QColor(0, 0, 0, 150))
+        shadow_effect.setOffset(10, 10)
+        self.setGraphicsEffect(shadow_effect)
+        
+        layout.addWidget(inner_widget)
 
 class ControlScreen(QWidget):
 
@@ -20,10 +37,21 @@ class ControlScreen(QWidget):
         """
         super().__init__(*args, **kwargs)
         uic.loadUi('control_screen.ui', self)
-    
+
         self.tab_bar = TabBar(self.tabBar, self.stackedWidget)
+        # Apply shadow effect to the right and bottom edges
+        shadow_effect = QGraphicsDropShadowEffect(self)
+        shadow_effect.setBlurRadius(20)
+        shadow_effect.setColor(QColor(0, 0, 0, 150))
+        shadow_effect.setOffset(10, 10)
+        self.stackedWidget.setGraphicsEffect(shadow_effect)
+
         self.add_skylight(0, "All")
         self.add_skylight(1, "Skylight 1")
+        self.add_skylight(2, "Skylight 2")
+        self.add_skylight(3, "Skylight 3")
+        self.add_skylight(4, "Skylight 4")
+        self.add_skylight(5, "Skylight 5")
 
 
         # Create a bunch of control widgets, add them to the tab bar
@@ -40,4 +68,13 @@ class ControlScreen(QWidget):
         Remove all skylights
         """
         #TODO implement
+
+if __name__ == "__main__":
+    import sys
+    app = QApplication(sys.argv)
+    test = QStackedWidget()
+    test_nav = Navigation(test)
+    w = ControlScreen(test_nav)
+    w.show()
+    sys.exit(app.exec())
         

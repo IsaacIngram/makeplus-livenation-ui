@@ -1,6 +1,7 @@
 from PyQt6 import uic
 
-from PyQt6.QtWidgets import QWidget
+from PyQt6.QtWidgets import QWidget, QGraphicsDropShadowEffect, QApplication
+from PyQt6.QtGui import QColor
 from switch import Switch
 
 class ControlWidget(QWidget):
@@ -22,14 +23,22 @@ class ControlWidget(QWidget):
         # Set local variables
         self.id = skylight_id
 
-        self.setStyleSheet("""
-            ControlWidget {
-                background-color: white;
-                border-radius: 10px;
-                border: 2px solid #a0a0a0;
-                box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-            }
-        """)
+        # self.setStyleSheet("""
+        #     QWidget#controlWidget {
+        #         background-color: red;
+        #         border: 2px solid white;
+        #         border-radius: 12px;
+        #     }
+        # """)
+
+        # Add shadow
+        # shadow_effect = QGraphicsDropShadowEffect(self)
+        # shadow_effect.setBlurRadius(20)
+        # shadow_effect.setColor(QColor(255, 255, 255, 76))
+        # shadow_effect.setOffset(-20, -20)
+        # self.setGraphicsEffect(shadow_effect)
+
+        print(self.styleSheet())
 
         self.show()
 
@@ -37,4 +46,9 @@ class ControlWidget(QWidget):
         # test_switch = Switch()
         # test_switch.show()
 
-        
+if __name__ == "__main__":
+    import sys
+    app = QApplication(sys.argv)
+    w = ControlWidget(0)
+    w.show()
+    sys.exit(app.exec())
