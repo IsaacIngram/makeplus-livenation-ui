@@ -1,8 +1,7 @@
 from PyQt6 import uic
 from PyQt6.QtWidgets import QApplication, QMainWindow
 
-from light_control_widget import LightControlWidget
-from homescreen_widget import HomescreenWidget
+from main_widget import MainWidget
 from navigation import Navigation
 
 class MainWindow(QMainWindow):
@@ -14,16 +13,8 @@ class MainWindow(QMainWindow):
         # Load UI file
         uic.loadUi('mainWindow.ui', self)
 
-        # Create navigation with stacked widget
-        self.navigation = Navigation(self.mainWidget)
-
-        # Create homescreen widget
-        homescreen_widget = HomescreenWidget(self.navigation)
-        self.navigation.add_page(homescreen_widget, "homescreen")
-
-        # Create light control widget
-        light_control_widget = LightControlWidget(self.navigation)
-        self.navigation.add_page(light_control_widget, "control")
+        main_widget = MainWidget()
+        self.setCentralWidget(main_widget)
 
 
 if __name__ == '__main__':

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>controlScreen</class>
+ <widget class="QWidget" name="controlScreen">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,18 +13,18 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QWidget" name="gridLayoutWidget">
+  <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>40</y>
+     <y>530</y>
      <width>1001</width>
-     <height>551</height>
+     <height>62</height>
     </rect>
    </property>
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
-     <widget class="QPushButton" name="light1Button">
+   <layout class="QHBoxLayout" name="tabBar">
+    <item>
+     <widget class="QPushButton" name="light1Button_2">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
         <horstretch>1</horstretch>
@@ -33,14 +33,14 @@
       </property>
       <property name="minimumSize">
        <size>
-        <width>160</width>
-        <height>100</height>
+        <width>100</width>
+        <height>60</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>240</width>
-        <height>150</height>
+        <width>1000</width>
+        <height>60</height>
        </size>
       </property>
       <property name="sizeIncrement">
@@ -58,9 +58,9 @@
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton {
-    background-color: #E6C548; /* Choose your desired background color */
-    color: white; /* Choose your desired text color */
-    border: 1px solid #E6C548; /* Add a border for better visibility */
+    background-color: #FFFFFF; /* Choose your desired background color */
+    color: black; /* Choose your desired text color */
+    border: 1px solid #FFFFFF; /* Add a border for better visibility */
     border-radius: 20px;
     padding: 6px;
 }</string>
@@ -71,6 +71,36 @@
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QStackedWidget" name="stackedWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>1000</width>
+     <height>521</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>1000</width>
+     <height>520</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>1000</width>
+     <height>521</height>
+    </size>
+   </property>
+   <property name="baseSize">
+    <size>
+     <width>1</width>
+     <height>1</height>
+    </size>
+   </property>
+   <widget class="QWidget" name="page"/>
+   <widget class="QWidget" name="page_2"/>
   </widget>
  </widget>
  <resources/>
