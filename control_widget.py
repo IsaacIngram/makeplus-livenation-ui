@@ -23,21 +23,6 @@ class ControlWidget(QWidget):
         # Set local variables
         self.id = skylight_id
 
-        # self.setStyleSheet("""
-        #     QWidget#controlWidget {
-        #         background-color: red;
-        #         border: 2px solid white;
-        #         border-radius: 12px;
-        #     }
-        # """)
-
-        # Add shadow
-        # shadow_effect = QGraphicsDropShadowEffect(self)
-        # shadow_effect.setBlurRadius(20)
-        # shadow_effect.setColor(QColor(255, 255, 255, 76))
-        # shadow_effect.setOffset(-20, -20)
-        # self.setGraphicsEffect(shadow_effect)
-
         print(self.styleSheet())
 
         self.show()

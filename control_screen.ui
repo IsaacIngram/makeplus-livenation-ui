@@ -13,13 +13,50 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <widget class="QStackedWidget" name="stackedWidget">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>10</y>
+     <width>950</width>
+     <height>530</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>950</width>
+     <height>530</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>950</width>
+     <height>530</height>
+    </size>
+   </property>
+   <property name="baseSize">
+    <size>
+     <width>1</width>
+     <height>1</height>
+    </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QWidget {
+	background-color: white;
+	border: 2px solid white;
+	border-radius: 20px;
+}</string>
+   </property>
+   <widget class="QWidget" name="page"/>
+   <widget class="QWidget" name="page_2"/>
+  </widget>
   <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>530</y>
-     <width>1001</width>
-     <height>62</height>
+     <x>40</x>
+     <y>520</y>
+     <width>951</width>
+     <height>71</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="tabBar">
@@ -39,7 +76,7 @@
       </property>
       <property name="maximumSize">
        <size>
-        <width>1000</width>
+        <width>950</width>
         <height>60</height>
        </size>
       </property>
@@ -62,43 +99,6 @@
      </widget>
     </item>
    </layout>
-  </widget>
-  <widget class="QStackedWidget" name="stackedWidget">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>1000</width>
-     <height>521</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>1000</width>
-     <height>520</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>1000</width>
-     <height>521</height>
-    </size>
-   </property>
-   <property name="baseSize">
-    <size>
-     <width>1</width>
-     <height>1</height>
-    </size>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QWidget {
-	background-color: white;
-	border: 2px solid white;
-	border-radius: 20px;
-}</string>
-   </property>
-   <widget class="QWidget" name="page"/>
-   <widget class="QWidget" name="page_2"/>
   </widget>
  </widget>
  <resources/>
