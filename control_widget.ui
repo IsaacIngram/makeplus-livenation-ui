@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>999</width>
+    <width>950</width>
     <height>520</height>
    </rect>
   </property>
@@ -18,7 +18,7 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>999</width>
+    <width>950</width>
     <height>520</height>
    </size>
   </property>
@@ -26,16 +26,12 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">
-        QWidget#controlWidget {
-            background-color: red;
-        }
-      </string>
+   <string notr="true"/>
   </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>90</x>
+     <x>80</x>
      <y>180</y>
      <width>211</width>
      <height>51</height>

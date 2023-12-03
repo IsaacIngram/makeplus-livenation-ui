@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import QPushButton, QGraphicsDropShadowEffect
-from PyQt6.QtCore import QRect
+from PyQt6.QtGui import QColor
 from PyQt6.QtGui import QFont
 
 
@@ -8,8 +8,8 @@ class TabButton(QPushButton):
     def __init__(self, name: str, *args, **kwargs):
         super().__init__(name, *args, **kwargs)
         self.setFont(QFont("Live Nation Regular"))
-        self.setMinimumHeight(100)
-        self.setMaximumHeight(100)
+        self.setMinimumHeight(60)
+        self.setMaximumHeight(60)
         self.setMinimumWidth(100)
         self.setMaximumWidth(951)
         self.setStyleSheet("""

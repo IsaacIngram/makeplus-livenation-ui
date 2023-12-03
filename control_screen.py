@@ -15,9 +15,9 @@ class PrivateShadow(QWidget):
 
         # Apply shadow effect to the right and bottom edges
         shadow_effect = QGraphicsDropShadowEffect(self)
-        shadow_effect.setBlurRadius(20)
-        shadow_effect.setColor(QColor(0, 0, 0, 150))
-        shadow_effect.setOffset(10, 10)
+        shadow_effect.setBlurRadius(10)
+        shadow_effect.setColor(QColor(200, 200, 200, 50))
+        shadow_effect.setOffset(-20, -20)
         self.setGraphicsEffect(shadow_effect)
         
         layout.addWidget(inner_widget)
@@ -41,9 +41,9 @@ class ControlScreen(QWidget):
         self.tab_bar = TabBar(self.tabBar, self.stackedWidget)
         # Apply shadow effect to the right and bottom edges
         shadow_effect = QGraphicsDropShadowEffect(self)
-        shadow_effect.setBlurRadius(20)
-        shadow_effect.setColor(QColor(0, 0, 0, 150))
-        shadow_effect.setOffset(10, 10)
+        shadow_effect.setBlurRadius(50)
+        shadow_effect.setColor(QColor(75, 75, 75, 80))
+        shadow_effect.setOffset(15, 15)
         self.stackedWidget.setGraphicsEffect(shadow_effect)
 
         self.add_skylight(0, "All")
