@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25.73 6">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #a5adb3;
+      }
+    </style>
+  </defs>
+  <g id="sleep_icon" data-name="sleep icon">
+    <ellipse id="menu_circle" data-name="menu circle" class="cls-1" cx="3.07" cy="3" rx="3.07" ry="3"/>
+    <ellipse id="menu_circle-2" data-name="menu circle" class="cls-1" cx="22.66" cy="3" rx="3.07" ry="3"/>
+    <ellipse id="menu_circle-3" data-name="menu circle" class="cls-1" cx="12.86" cy="3" rx="3.07" ry="3"/>
+  </g>
+</svg>

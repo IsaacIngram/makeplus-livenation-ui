@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.61 13.61">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #a5adb3;
+      }
+    </style>
+  </defs>
+  <g id="sleep_icon" data-name="sleep icon">
+    <path id="close_menu_icon" data-name="close menu icon" class="cls-1" d="m8.92,6.8l4.24-4.24c.59-.59.59-1.54,0-2.12-.59-.59-1.54-.59-2.12,0l-4.24,4.24L2.56.44C1.97-.15,1.03-.15.44.44-.15,1.03-.15,1.97.44,2.56l4.24,4.24L.44,11.05c-.59.59-.59,1.54,0,2.12.59.59,1.54.59,2.12,0l4.24-4.24,4.24,4.24c.59.59,1.54.59,2.12,0,.59-.59.59-1.54,0-2.12l-4.24-4.24Z"/>
+  </g>
+</svg>
