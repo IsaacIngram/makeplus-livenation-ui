@@ -105,6 +105,19 @@
     <string>CheckBox</string>
    </property>
   </widget>
+  <widget class="QCheckBox" name="filterSwitch">
+   <property name="geometry">
+    <rect>
+     <x>760</x>
+     <y>150</y>
+     <width>171</width>
+     <height>133</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>CheckBox</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

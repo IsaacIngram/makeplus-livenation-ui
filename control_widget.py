@@ -8,7 +8,7 @@ import xml.etree.ElementTree as ET
 class ControlWidget(QWidget):
 
     id: int
-    switch_widget: SwitchWidget
+    blackout_switch_widget: SwitchWidget
 
     def __init__(self, skylight_id: int, *args, **kwargs):
         """
@@ -25,14 +25,40 @@ class ControlWidget(QWidget):
         # Set local variables
         self.id = skylight_id
 
-        # Create switch
-        self.switch_widget = SwitchWidget('images/switch-icon.svg', self.blackoutSwitch, self)
-        self.switch_widget.clicked.connect(self.handle_svg_click)
+        # Create switches
+        self.blackout_switch_widget = SwitchWidget('images/switch-icon.svg', self.blackoutSwitch, self)
+        self.filter_switch_widget = SwitchWidget('images/switch-icon.svg', self.filterSwitch, self)
+        # Map switch functionality
+        self.blackout_switch_widget.clicked.connect(self.blackout_switch_callback)
+        self.filter_switch_widget.clicked.connect(self.filter_switch_callback)
 
         self.show()
 
-    def handle_svg_click(self):
-        self.switch_widget.checkbox.setChecked(not self.switch_widget.checkbox.isChecked())
+    def blackout_switch_callback(self):
+        """
+        Callback function for when the blackout switch is clicked
+        """
+        if self.blackout_switch_widget.checkbox.isChecked():
+            # Uncheck
+            self.blackout_switch_widget.checkbox.setChecked(False)
+            print("Blackout switch unchecked")
+        else:
+            # Check
+            self.blackout_switch_widget.checkbox.setChecked(True)
+            print("Blackout switch checked")
+
+    def filter_switch_callback(self):
+        """
+        Callback function for when the filter switch is clicked
+        """
+        if self.filter_switch_widget.checkbox.isChecked():
+            # Uncheck
+            self.filter_switch_widget.checkbox.setChecked(False)
+            print("Filter switch unchecked")
+        else:
+            # Check
+            self.filter_switch_widget.checkbox.setChecked(True)
+            print("Filter switch checked")
 
 if __name__ == "__main__":
     import sys
