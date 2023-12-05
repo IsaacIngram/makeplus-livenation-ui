@@ -6,22 +6,6 @@ from tab_bar import TabBar
 from control_widget import ControlWidget
 from navigation import Navigation
 
-class PrivateShadow(QWidget):
-    def __init__(self, inner_widget: QWidget, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        
-        layout = QVBoxLayout(self)
-        layout.setContentsMargins(0, 0, 5, 5)
-
-        # Apply shadow effect to the right and bottom edges
-        shadow_effect = QGraphicsDropShadowEffect(self)
-        shadow_effect.setBlurRadius(10)
-        shadow_effect.setColor(QColor(200, 200, 200, 50))
-        shadow_effect.setOffset(-20, -20)
-        self.setGraphicsEffect(shadow_effect)
-        
-        layout.addWidget(inner_widget)
-
 class ControlScreen(QWidget):
 
     tab_bar: TabBar
@@ -36,9 +20,12 @@ class ControlScreen(QWidget):
         screens (control screen, settings screen, and dim screen)
         """
         super().__init__(*args, **kwargs)
+        # Load UI elements
         uic.loadUi('control_screen.ui', self)
 
+        # Create tab bar
         self.tab_bar = TabBar(self.tabBar, self.stackedWidget)
+
         # Apply shadow effect to the right and bottom edges
         shadow_effect = QGraphicsDropShadowEffect(self)
         shadow_effect.setBlurRadius(50)
