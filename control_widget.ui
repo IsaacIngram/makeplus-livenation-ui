@@ -92,6 +92,19 @@
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
+  <widget class="QCheckBox" name="blackoutSwitch">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>150</y>
+     <width>171</width>
+     <height>133</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>CheckBox</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

@@ -5,22 +5,6 @@ from PyQt6.QtSvgWidgets import QSvgWidget
 from switch_widget import SwitchWidget
 import xml.etree.ElementTree as ET
 
-def get_svg_dimensions(file_path):
-    try:
-        # Parse the SVG file
-        tree = ET.parse(file_path)
-        root = tree.getroot()
-
-        # Extract width and height attributes from the root <svg> element
-        width = root.get('width')
-        height = root.get('height')
-
-        return width, height
-
-    except Exception as e:
-        print(f"Error: {e}")
-        return None, None
-
 class ControlWidget(QWidget):
 
     id: int
@@ -42,15 +26,13 @@ class ControlWidget(QWidget):
         self.id = skylight_id
 
         # Create switch
-        print(get_svg_dimensions('images/switch-icon.svg'))
-        self.switch_widget = SwitchWidget('images/switch-icon.svg', self)
-        self.switch_widget.setGeometry(100, 100, 174, 133)
+        self.switch_widget = SwitchWidget('images/switch-icon.svg', self.blackoutSwitch, self)
         self.switch_widget.clicked.connect(self.handle_svg_click)
 
         self.show()
 
     def handle_svg_click(self):
-        self.switch_widget.switch.setChecked(not self.switch_widget.switch.isChecked())
+        self.switch_widget.checkbox.setChecked(not self.switch_widget.checkbox.isChecked())
 
 if __name__ == "__main__":
     import sys
