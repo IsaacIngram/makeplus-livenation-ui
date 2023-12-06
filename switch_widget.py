@@ -2,57 +2,84 @@ from PyQt6.QtWidgets import QWidget, QCheckBox, QVBoxLayout
 from PyQt6.QtSvgWidgets import QSvgWidget
 from PyQt6.QtGui import QPainter, QColor, QPen, QTransform
 from PyQt6.QtCore import Qt, pyqtSignal, QPoint
+from enum import Enum
 
+class Position(Enum):
+    OPEN = 1
+    CLOSED = 2
+    DISABLED_OPEN = 3
+    DISABLED_CLOSED = 4
+
+open_path = 'images/switch/open.svg'
+closed_path = 'images/switch/closed.svg'
+open_disabled_path = 'images/switch/open-disabled.svg'
+closed_disabled_path = 'images/switch/closed-disabled.svg'
 
 class SwitchWidget(QWidget):
     
     clicked = pyqtSignal()
     main_svg: QSvgWidget
-    indicator_svg: QSvgWidget
     checkbox: QCheckBox
-    original_x: int
-    original_y: int
+    disabled: bool
 
-    def __init__(self, main_svg_path: str, indicator_svg_path: str, checkbox: QCheckBox, parent=None):
+    def __init__(self, default_position: Position, checkbox: QCheckBox, parent=None):
         """
         Create new SwitchWidget
 
         Params:
-        main_svg_path (str): Path to main SVG
-        indicator_svg_path (str): Path to the indicator SVG
+        default_position (Position): The position to set the switch to by default
         checkbox (QCheckBox): QCheckBox this SwitchWidget is replacing
         parent: Parent widget
         """
         super().__init__(parent)
 
-        # Load SVGs
+        # Load SVG based on provided default
         self.main_svg = QSvgWidget(self)
-        self.main_svg.load(main_svg_path)
-        self.indicator_svg = QSvgWidget(self)
-        self.indicator_svg.load(indicator_svg_path)
+        if default_position == Position.OPEN:
+            self.main_svg.load(open_path)
+            self.disabled = False
+        elif default_position == Position.CLOSED:
+            self.main_svg.load(closed_path)
+            self.disabled = False
+        elif default_position == Position.DISABLED_OPEN:
+            self.main_svg.load(open_disabled_path)
+            self.disabled = True
+        elif default_position == Position.DISABLED_CLOSED:
+            self.main_svg.load(closed_disabled_path)
+            self.disabled = True
 
         # Create switch
         self.checkbox = checkbox
-        self.checkbox.stateChanged.connect(self.on_state_changed) # Connect to action
+        self.checkbox.stateChanged.connect(self.on_clicked) # Connect to action
         self.checkbox.hide() # Hide because we replace with SVG
 
         # Lay out SVG
         layout = QVBoxLayout(self)
         layout.addWidget(self.main_svg, alignment=Qt.AlignmentFlag.AlignHCenter)
-        layout.addWidget(self.indicator_svg, alignment=Qt.AlignmentFlag.AlignHCenter)
         layout.addWidget(self.checkbox, alignment=Qt.AlignmentFlag.AlignHCenter)
         layout.addStretch()
 
-        self.original_x = self.checkbox.pos().x()
-        self.original_y = self.checkbox.pos().y()
+        self.original_pos = self.checkbox.pos()
 
-        self.setGeometry(self.original_x, self.original_y, 300, 300)
+        print(f"original {self.original_pos.x()}, {self.original_pos.y()}")
+        print(f"new {self.mapFromParent(self.original_pos).x()}, {self.mapFromParent(self.original_pos).y()}")
 
-    def on_state_changed(self, state):
+
+        self.setGeometry(
+            self.mapFromParent(self.original_pos).x(), 
+            self.mapFromParent(self.original_pos).y(),
+            300, 300)
+
+    def on_clicked(self, state):
         """
         Callback function for when the switch state is changed
         """
         print("Switch clicked")
+        self.disabled = False
+        if self.checkbox.isChecked():
+            self.main_svg.load(open_path)
+        else:
+            self.main_svg.load(closed_path)
         self.update()
 
     def mousePressEvent(self, event):
@@ -72,14 +99,16 @@ class SwitchWidget(QWidget):
         # Draw the main SVG as the background
         self.main_svg.render(painter)
 
-        # Draw the indicator SVG
+    def disable(self):
+        """
+        Set this button to disabled. Should be called when another control feature
+        is interacted with that causes the last input of this switch to be irrelevant,
+        such as interacting with the slider.
+        """
+        self.disabled = True
+        print("Disabled!!")
+        # Make call to state changed callback
         if self.checkbox.isChecked():
-            # Switch to close/off
-            indicator_pos = QPoint(self.original_x - 120, self.original_y - 166)
+            self.main_svg.load(open_disabled_path)
         else:
-            # Switch to open/on
-            indicator_pos = QPoint(self.original_x - 140, self.original_y - 166)
-        
-        self.indicator_svg.setGeometry(indicator_pos.x(), indicator_pos.y(), 37, 20)
-
-        return
+            self.main_svg.load(closed_disabled_path)

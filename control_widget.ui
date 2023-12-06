@@ -95,7 +95,7 @@
   <widget class="QCheckBox" name="blackoutSwitch">
    <property name="geometry">
     <rect>
-     <x>260</x>
+     <x>200</x>
      <y>180</y>
      <width>65</width>
      <height>24</height>
@@ -134,7 +134,7 @@
   <widget class="QCheckBox" name="filterSwitch">
    <property name="geometry">
     <rect>
-     <x>760</x>
+     <x>700</x>
      <y>180</y>
      <width>65</width>
      <height>24</height>

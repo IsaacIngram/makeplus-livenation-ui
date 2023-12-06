@@ -1,7 +1,7 @@
 from PyQt6 import uic
 
 from PyQt6.QtWidgets import QWidget, QApplication
-from switch_widget import SwitchWidget
+from switch_widget import SwitchWidget, Position
 from svg_button_widget import SvgButtonWidget
 
 class ControlWidget(QWidget):
@@ -26,14 +26,15 @@ class ControlWidget(QWidget):
         self.id = skylight_id
 
         # Create switches
-        self.blackout_switch_widget = SwitchWidget('images/switch-static.svg', 'images/switch-dynamic.svg', self.blackoutSwitch, self)
-        self.filter_switch_widget = SwitchWidget('images/switch-static.svg', 'images/switch-dynamic.svg', self.filterSwitch, self)
+        self.blackout_switch_widget = SwitchWidget(Position.CLOSED, self.blackoutSwitch, self)
+        self.filter_switch_widget = SwitchWidget(Position.CLOSED, self.filterSwitch, self)
         self.blackout_switch_widget.clicked.connect(self.blackout_switch_callback)
         self.filter_switch_widget.clicked.connect(self.filter_switch_callback)
 
         # Create buttons
         self.dim_button = SvgButtonWidget('images/dim-icon.svg', self.dimButton, 100, 100, self)
         self.settings_button = SvgButtonWidget('images/settings-icon.svg', self.settingsButton, 100, 100, self)
+        self.dim_button.clicked.connect(self.blackout_switch_widget.disable)
 
         self.show()
 

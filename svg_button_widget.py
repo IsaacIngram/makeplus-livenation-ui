@@ -1,10 +1,13 @@
+import typing
+from PyQt6 import QtGui
 from PyQt6.QtWidgets import QPushButton, QWidget, QVBoxLayout
 from PyQt6.QtSvgWidgets import QSvgWidget
 from PyQt6.QtGui import QPainter, QColor, QPen
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import Qt, pyqtSignal
 
 class SvgButtonWidget(QWidget):
 
+    clicked = pyqtSignal()
     svg_widget: QSvgWidget
     button: QPushButton
     original_x: int
@@ -24,7 +27,6 @@ class SvgButtonWidget(QWidget):
 
         # Create button
         self.button = button
-        self.button.clicked.connect(self.on_click)
 
         self.button.hide()
 
@@ -38,9 +40,11 @@ class SvgButtonWidget(QWidget):
 
         self.setGeometry(self.original_x, self.original_y, self.width, self.height)
 
-    def on_click():
-        #TODO add callback function. Probably lambda passed in via constructor
-        print("Button clicked")
+    def mousePressEvent(self, event):
+        if self.svg_widget.geometry().contains(event.pos()):
+            print("clicked")
+            self.clicked.emit()
+        
 
     def paintEvent(self, event):
         painter = QPainter(self)
