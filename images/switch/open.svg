@@ -6,15 +6,11 @@
         fill: none;
       }
 
-      .cls-3 {
-        clip-path: url(#clippath);
+      .cls-1, .cls-3, .cls-4, .cls-5 {
+        stroke-width: 0px;
       }
 
-      .cls-4 {
-        fill: #f2f2f2;
-      }
-
-      .cls-5 {
+      .cls-6 {
         clip-path: url(#clippath-1);
       }
 
@@ -24,12 +20,20 @@
         stroke-width: .75px;
       }
 
-      .cls-6 {
+      .cls-3 {
         fill: url(#radial-gradient-2);
       }
 
       .cls-7 {
+        clip-path: url(#clippath);
+      }
+
+      .cls-4 {
         fill: url(#radial-gradient);
+      }
+
+      .cls-5 {
+        fill: #f2f2f2;
       }
     </style>
     <clipPath id="clippath">
@@ -65,16 +69,16 @@
   <g id="button">
     <g>
       <g>
-        <g class="cls-3">
-          <rect id="blackout_open_close_bar-2" data-name="blackout open close bar" class="cls-7" x="0" y="0" width="65" height="24" rx="12" ry="12"/>
+        <g class="cls-7">
+          <rect id="blackout_open_close_bar-2" data-name="blackout open close bar" class="cls-4" x="0" y="0" width="65" height="24" rx="12" ry="12"/>
         </g>
         <g>
-          <path class="cls-4" d="M17.47,11.92l2.82,3.17h-1.07l-2.28-2.58-2.32,2.58h-1.01l2.82-3.13-2.82-3.17h1.06l2.29,2.58,2.32-2.58h1.01l-2.82,3.13Z"/>
+          <path class="cls-5" d="m17.47,11.92l2.82,3.17h-1.07l-2.28-2.58-2.32,2.58h-1.01l2.82-3.13-2.82-3.17h1.06l2.29,2.58,2.32-2.58h1.01l-2.82,3.13Z"/>
           <circle id="Open_Symbol" data-name="Open Symbol" class="cls-2" cx="47.9" cy="12" r="3.49"/>
         </g>
       </g>
-      <g class="cls-5">
-        <rect id="Blackout_open_button-2" data-name="Blackout open button" class="cls-6" x="31.17" y="0" width="33.83" height="24" rx="12" ry="12"/>
+      <g class="cls-6">
+        <rect id="Blackout_open_button-2" data-name="Blackout open button" class="cls-3" x="31.17" y="0" width="33.83" height="24" rx="12" ry="12"/>
       </g>
     </g>
   </g>
