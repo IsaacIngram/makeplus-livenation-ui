@@ -26,8 +26,9 @@ class ControlWidget(QWidget):
         self.id = skylight_id
 
         # Create switches
-        self.blackout_switch_widget = SwitchWidget('images/switch-icon.svg', self.blackoutSwitch, self)
-        self.filter_switch_widget = SwitchWidget('images/switch-icon.svg', self.filterSwitch, self)
+        self.blackout_switch_widget = SwitchWidget('images/switch-static.svg', self.blackoutSwitch, self)
+        self.filter_switch_widget = SwitchWidget('images/switch-static.svg', self.filterSwitch, self)
+        
         # Map switch functionality
         self.blackout_switch_widget.clicked.connect(self.blackout_switch_callback)
         self.filter_switch_widget.clicked.connect(self.filter_switch_callback)

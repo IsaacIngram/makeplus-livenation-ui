@@ -37,7 +37,6 @@ class SvgButtonWidget(QWidget):
         self.original_y = self.button.pos().y()
 
         self.setGeometry(self.original_x, self.original_y, self.width, self.height)
-        print(f"original {self.original_x}, {self.original_y}")
 
     def on_click():
         #TODO add callback function. Probably lambda passed in via constructor
