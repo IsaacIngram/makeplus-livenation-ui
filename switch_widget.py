@@ -13,14 +13,23 @@ class SwitchWidget(QWidget):
     original_x: int
     original_y: int
 
-    def __init__(self, svg_path, checkbox: QCheckBox, parent=None):
+    def __init__(self, main_svg_path: str, indicator_svg_path: str, checkbox: QCheckBox, parent=None):
+        """
+        Create new SwitchWidget
+
+        Params:
+        main_svg_path (str): Path to main SVG
+        indicator_svg_path (str): Path to the indicator SVG
+        checkbox (QCheckBox): QCheckBox this SwitchWidget is replacing
+        parent: Parent widget
+        """
         super().__init__(parent)
 
         # Load SVGs
         self.main_svg = QSvgWidget(self)
-        self.main_svg.load(svg_path)
+        self.main_svg.load(main_svg_path)
         self.indicator_svg = QSvgWidget(self)
-        self.indicator_svg.load("images/switch-dynamic.svg")
+        self.indicator_svg.load(indicator_svg_path)
 
         # Create switch
         self.checkbox = checkbox
