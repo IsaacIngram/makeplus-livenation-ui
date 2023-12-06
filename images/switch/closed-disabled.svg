@@ -1,53 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 65 24">
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 65.01 24">
   <defs>
     <style>
       .cls-1, .cls-2 {
-        fill: none;
-      }
-
-      .cls-3 {
-        clip-path: url(#clippath);
-      }
-
-      .cls-4 {
-        fill: #f2f2f2;
-      }
-
-      .cls-5 {
         fill: #fff;
       }
 
-      .cls-6 {
-        clip-path: url(#clippath-1);
+      .cls-3 {
+        opacity: .5;
       }
 
-      .cls-7 {
+      .cls-4 {
         clip-path: url(#clippath-2);
       }
 
-      .cls-2 {
+      .cls-5, .cls-6 {
+        fill: none;
+      }
+
+      .cls-5, .cls-2, .cls-7, .cls-8, .cls-9 {
+        stroke-width: 0px;
+      }
+
+      .cls-10 {
+        clip-path: url(#clippath-1);
+      }
+
+      .cls-6 {
         stroke: #f2f2f2;
         stroke-miterlimit: 10;
         stroke-width: .75px;
       }
 
-      .cls-8 {
+      .cls-7 {
         fill: url(#radial-gradient-2);
       }
 
-      .cls-9 {
-        opacity: .59;
+      .cls-11 {
+        clip-path: url(#clippath);
       }
 
-      .cls-10 {
+      .cls-8 {
         fill: url(#radial-gradient);
+      }
+
+      .cls-9 {
+        fill: #f2f2f2;
       }
     </style>
     <clipPath id="clippath">
-      <rect id="blackout_open_close_bar" data-name="blackout open close bar" class="cls-1" x="0" y="0" width="65" height="24" rx="12" ry="12"/>
+      <rect id="blackout_open_close_bar" data-name="blackout open close bar" class="cls-5" x="0" y="0" width="65" height="24" rx="12" ry="12"/>
     </clipPath>
-    <radialGradient id="radial-gradient" cx="32.5" cy="12" fx="32.5" fy="12" r="33.16" gradientTransform="translate(66.6 -20.57) rotate(89.89) scale(1 2.85)" gradientUnits="userSpaceOnUse">
+    <radialGradient id="radial-gradient" cx="32.51" cy="12" fx="32.51" fy="12" r="33.16" gradientTransform="translate(66.6 -20.57) rotate(89.89) scale(1 2.85)" gradientUnits="userSpaceOnUse">
       <stop offset=".03" stop-color="#0f2750" stop-opacity=".15"/>
       <stop offset=".22" stop-color="#0f2750" stop-opacity=".23"/>
       <stop offset=".5" stop-color="#0f2750" stop-opacity=".47"/>
@@ -55,9 +59,9 @@
       <stop offset=".93" stop-color="#0f2750"/>
     </radialGradient>
     <clipPath id="clippath-1">
-      <rect id="Blackout_open_button" data-name="Blackout open button" class="cls-1" x=".04" y="0" width="33.83" height="24" rx="12" ry="12"/>
+      <rect id="Blackout_open_button" data-name="Blackout open button" class="cls-5" x="0" y="0" width="33.83" height="24" rx="12" ry="12"/>
     </clipPath>
-    <radialGradient id="radial-gradient-2" cx="16.96" cy="12" fx="16.96" fy="12" r="26.74" gradientTransform="translate(0 3.1) scale(1 .74)" gradientUnits="userSpaceOnUse">
+    <radialGradient id="radial-gradient-2" cx="16.92" cy="12" fx="16.92" fy="12" r="26.74" gradientTransform="translate(0 3.1) scale(1 .74)" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#fff"/>
       <stop offset=".37" stop-color="#fdfdfd" stop-opacity=".99"/>
       <stop offset=".51" stop-color="#f6f7f8" stop-opacity=".97"/>
@@ -72,24 +76,24 @@
       <stop offset="1" stop-color="#0f2750" stop-opacity=".15"/>
     </radialGradient>
     <clipPath id="clippath-2">
-      <rect id="blackout_open_close_bar-4" data-name="blackout open close bar" class="cls-5" x="0" y="0" width="65" height="24" rx="12" ry="12"/>
+      <rect id="blackout_open_close_bar-4" data-name="blackout open close bar" class="cls-2" x="0" y="0" width="65" height="24" rx="12" ry="12"/>
     </clipPath>
   </defs>
   <g id="button">
-    <g class="cls-3">
-      <rect id="blackout_open_close_bar-2" data-name="blackout open close bar" class="cls-10" x="0" y="0" width="65" height="24" rx="12" ry="12"/>
+    <g class="cls-11">
+      <rect id="blackout_open_close_bar-2" data-name="blackout open close bar" class="cls-8" x="0" y="0" width="65" height="24" rx="12" ry="12"/>
     </g>
     <g>
-      <path class="cls-4" d="M17.47,11.92l2.82,3.17h-1.07l-2.28-2.58-2.32,2.58h-1.01l2.82-3.13-2.82-3.17h1.06l2.29,2.58,2.32-2.58h1.01l-2.82,3.13Z"/>
-      <circle id="Open_Symbol" data-name="Open Symbol" class="cls-2" cx="47.9" cy="12" r="3.49"/>
+      <path class="cls-9" d="m17.48,11.92l2.82,3.17h-1.07l-2.28-2.58-2.32,2.58h-1.01l2.82-3.13-2.82-3.17h1.06l2.29,2.58,2.32-2.58h1.01l-2.82,3.13Z"/>
+      <circle id="Open_Symbol" data-name="Open Symbol" class="cls-6" cx="47.9" cy="12" r="3.49"/>
     </g>
-    <g class="cls-6">
-      <rect id="Blackout_open_button-2" data-name="Blackout open button" class="cls-8" x=".04" y="0" width="33.83" height="24" rx="12" ry="12"/>
+    <g class="cls-10">
+      <rect id="Blackout_open_button-2" data-name="Blackout open button" class="cls-7" x="0" y="0" width="33.83" height="24" rx="12" ry="12"/>
     </g>
-    <g class="cls-9">
-      <rect id="blackout_open_close_bar-3" data-name="blackout open close bar" class="cls-5" x="0" y="0" width="65" height="24" rx="12" ry="12"/>
-      <g class="cls-7">
-        <rect id="blackout_open_close_bar-5" data-name="blackout open close bar" class="cls-5" x="0" y="0" width="65" height="24" rx="12" ry="12"/>
+    <g class="cls-3">
+      <rect id="blackout_open_close_bar-3" data-name="blackout open close bar" class="cls-1" x="0" y="0" width="65" height="24" rx="12" ry="12"/>
+      <g class="cls-4">
+        <rect id="blackout_open_close_bar-5" data-name="blackout open close bar" class="cls-2" x="0" y="0" width="65" height="24" rx="12" ry="12"/>
       </g>
     </g>
   </g>
