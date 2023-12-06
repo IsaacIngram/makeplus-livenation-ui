@@ -3,6 +3,7 @@ from PyQt6 import uic
 from PyQt6.QtWidgets import QWidget, QApplication
 from switch_widget import SwitchWidget, Position
 from svg_button_widget import SvgButtonWidget
+from svg_slider import SvgSlider
 
 class ControlWidget(QWidget):
 
@@ -35,6 +36,9 @@ class ControlWidget(QWidget):
         self.dim_button = SvgButtonWidget('images/dim-icon.svg', self.dimButton, 100, 100, self)
         self.settings_button = SvgButtonWidget('images/settings-icon.svg', self.settingsButton, 100, 100, self)
         self.dim_button.clicked.connect(self.blackout_switch_widget.disable)
+
+        # Create sliders
+        slider = SvgSlider(self.blackoutSlider, parent=self)
 
         self.show()
 

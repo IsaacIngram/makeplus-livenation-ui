@@ -16,26 +16,47 @@ class SvgSlider(QSlider):
     handle_svg_renderer: QSvgRenderer
     temp_value: int
 
-    def __init__(self, default_value: int = 0, parent=None):
+    def __init__(self, slider: QSlider = None, default_value: int = 0, parent=None):
+        """
+        Created new SVG Slider
+
+        Params:
+        slider (QSlider): Optional slider to get geometric data from
+        default_value (int): Optional starting value for this slider
+        parent: Optional parent of this widget
+        """
         super().__init__(parent)
 
-        self.setMinimum(0)
-        self.setMaximum(100)
+        if slider is not None:
+            pos_x = slider.pos().x()
+            pos_y = slider.pos().y()
+            width = slider.width()
+            height = slider.height()
+            slider.hide()
+        else:
+            pos_x = 0
+            pos_y = 0
+            width = 280
+            height = 100
+            
+        self.setMinimum(slider_min)
+        self.setMaximum(slider_max)
 
         self.track_svg_renderer = QSvgRenderer(track_path)
         self.handle_svg_renderer = QSvgRenderer(handle_path)
 
         self.temp_value = default_value
+        self.setGeometry(pos_x, pos_y, width, height)
 
     def paintEvent(self, event):
         painter = QPainter(self)
         painter.setRenderHint(QPainter.RenderHint.Antialiasing)
 
         # Draw track
-        track_rect = QRectF(0, self.height() / 2 - 2, self.width(), 30)
+        track_rect = QRectF(0, self.height() / 2 - 2, self.width(), 16)
         self.track_svg_renderer.render(painter, track_rect)
         
-        handle_rect = QRectF((self.temp_value/100) * self.width() - 8, self.height() / 2 -8, 16, 16)
+        handle_rect = QRectF((self.temp_value/100) * self.width() - 8, self.height() / 2 -8, 23, 28)
         self.handle_svg_renderer.render(painter, handle_rect)
 
     def sizeHint(self):
