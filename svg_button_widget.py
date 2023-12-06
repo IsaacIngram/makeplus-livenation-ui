@@ -50,9 +50,9 @@ class SvgButtonWidget(QWidget):
         painter = QPainter(self)
 
         #TODO remove temporary border drawing
-        border_pen = QPen(QColor(255, 0, 0), 2)
-        painter.setPen(border_pen)
-        painter.drawRect(self.svg_widget.geometry())
+        # border_pen = QPen(QColor(255, 0, 0), 2)
+        # painter.setPen(border_pen)
+        # painter.drawRect(self.svg_widget.geometry())
         #END border drawing
 
         # Draw the SVG image as the background
