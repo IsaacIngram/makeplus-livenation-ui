@@ -1,14 +1,14 @@
 from PyQt6 import uic
 
 from PyQt6.QtWidgets import QWidget, QApplication
-from PyQt6.QtSvgWidgets import QSvgWidget
 from switch_widget import SwitchWidget
-import xml.etree.ElementTree as ET
+from svg_button_widget import SvgButtonWidget
 
 class ControlWidget(QWidget):
 
     id: int
     blackout_switch_widget: SwitchWidget
+    filter_switch_widget: SwitchWidget
 
     def __init__(self, skylight_id: int, *args, **kwargs):
         """
@@ -31,6 +31,12 @@ class ControlWidget(QWidget):
         # Map switch functionality
         self.blackout_switch_widget.clicked.connect(self.blackout_switch_callback)
         self.filter_switch_widget.clicked.connect(self.filter_switch_callback)
+
+        # Create dim button
+        self.dim_button = SvgButtonWidget('images/dim-icon.svg', self.dimButton, 100, 100, self)
+
+        # Create settings button
+        self.settings_button = SvgButtonWidget('images/settings-icon.svg', self.settingsButton, 100, 100, self)
 
         self.show()
 
