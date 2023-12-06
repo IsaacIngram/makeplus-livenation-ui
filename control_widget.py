@@ -38,7 +38,8 @@ class ControlWidget(QWidget):
         self.dim_button.clicked.connect(self.blackout_switch_widget.disable)
 
         # Create sliders
-        slider = SvgSlider(self.blackoutSlider, parent=self)
+        blackout_slider = SvgSlider(self.blackoutSlider, parent=self)
+        filter_slider = SvgSlider(self.filterSlider, parent=self)
 
         self.show()
 
