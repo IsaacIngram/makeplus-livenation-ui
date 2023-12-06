@@ -96,22 +96,9 @@
    <property name="geometry">
     <rect>
      <x>260</x>
-     <y>150</y>
-     <width>171</width>
-     <height>133</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>CheckBox</string>
-   </property>
-  </widget>
-  <widget class="QCheckBox" name="filterSwitch">
-   <property name="geometry">
-    <rect>
-     <x>760</x>
-     <y>150</y>
-     <width>171</width>
-     <height>133</height>
+     <y>180</y>
+     <width>65</width>
+     <height>24</height>
     </rect>
    </property>
    <property name="text">
@@ -142,6 +129,19 @@
    </property>
    <property name="text">
     <string>PushButton</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="filterSwitch">
+   <property name="geometry">
+    <rect>
+     <x>760</x>
+     <y>180</y>
+     <width>65</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>CheckBox</string>
    </property>
   </widget>
  </widget>

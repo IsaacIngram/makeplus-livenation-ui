@@ -1,15 +1,14 @@
-import typing
-from PyQt6 import QtGui
 from PyQt6.QtWidgets import QWidget, QCheckBox, QVBoxLayout
 from PyQt6.QtSvgWidgets import QSvgWidget
-from PyQt6.QtGui import QPainter, QColor, QPen
-from PyQt6.QtCore import Qt, pyqtSignal
+from PyQt6.QtGui import QPainter, QColor, QPen, QTransform
+from PyQt6.QtCore import Qt, pyqtSignal, QPoint
 
 
 class SwitchWidget(QWidget):
     
     clicked = pyqtSignal()
-    svg_widget: QSvgWidget
+    main_svg: QSvgWidget
+    indicator_svg: QSvgWidget
     checkbox: QCheckBox
     original_x: int
     original_y: int
@@ -17,25 +16,28 @@ class SwitchWidget(QWidget):
     def __init__(self, svg_path, checkbox: QCheckBox, parent=None):
         super().__init__(parent)
 
-        # Load SVG image
-        self.svg_widget = QSvgWidget(self)
-        self.svg_widget.load(svg_path)
+        # Load SVGs
+        self.main_svg = QSvgWidget(self)
+        self.main_svg.load(svg_path)
+        self.indicator_svg = QSvgWidget(self)
+        self.indicator_svg.load("images/switch-dynamic.svg")
 
         # Create switch
         self.checkbox = checkbox
-        self.checkbox.stateChanged.connect(self.on_state_changed)
+        self.checkbox.stateChanged.connect(self.on_state_changed) # Connect to action
+        self.checkbox.hide() # Hide because we replace with SVG
 
-        self.checkbox.hide()
-
+        # Lay out SVG
         layout = QVBoxLayout(self)
-        layout.addWidget(self.svg_widget, alignment=Qt.AlignmentFlag.AlignHCenter)
+        layout.addWidget(self.main_svg, alignment=Qt.AlignmentFlag.AlignHCenter)
+        layout.addWidget(self.indicator_svg, alignment=Qt.AlignmentFlag.AlignHCenter)
         layout.addWidget(self.checkbox, alignment=Qt.AlignmentFlag.AlignHCenter)
         layout.addStretch()
 
         self.original_x = self.checkbox.pos().x()
         self.original_y = self.checkbox.pos().y()
 
-        self.setGeometry(self.original_x, self.original_y, 174, 133)
+        self.setGeometry(self.original_x, self.original_y, 300, 300)
 
     def on_state_changed(self, state):
         """
@@ -46,25 +48,29 @@ class SwitchWidget(QWidget):
 
     def mousePressEvent(self, event):
         # Emit the signal when the svg is clicked
-        if self.svg_widget.geometry().contains(event.pos()):
+        if self.main_svg.geometry().contains(event.pos()):
             self.clicked.emit()
 
     def paintEvent(self, event):
         painter = QPainter(self)
-
+        
         #TODO remove temporary border drawing
         border_pen = QPen(QColor(255, 0, 0), 2)
         painter.setPen(border_pen)
-        painter.drawRect(self.svg_widget.geometry())
+        painter.drawRect(self.main_svg.geometry())
         #END border drawing
 
-        # Draw the SVG image as the background
-        self.svg_widget.render(painter)
+        # Draw the main SVG as the background
+        self.main_svg.render(painter)
 
-        # Draw a circle based on the switch state
-        if self.checkbox.isEnabled():
-            painter.setBrush(QColor(255, 0, 0))
-            painter.drawEllipse(100, 100, 20, 20)
+        # Draw the indicator SVG
+        if self.checkbox.isChecked():
+            # Switch to close/off
+            indicator_pos = QPoint(self.original_x - 120, self.original_y - 166)
         else:
-            painter.setBrush(QColor(255, 0, 0))
-            painter.drawEllipse(100, 100, 20, 20)
+            # Switch to open/on
+            indicator_pos = QPoint(self.original_x - 140, self.original_y - 166)
+        
+        self.indicator_svg.setGeometry(indicator_pos.x(), indicator_pos.y(), 37, 20)
+
+        return
