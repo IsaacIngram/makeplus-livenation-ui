@@ -7,14 +7,17 @@ from PyQt6.QtCore import Qt, QRectF, QSize
 
 handle_path = 'images/slider/handle.svg'
 track_path = 'images/slider/slider.svg'
-slider_max: int = 100
-slider_min: int = 0
+slider_max_val: int = 100
+slider_min_val: int = 0
 
 class SvgSlider(QSlider):
 
     track_svg_renderer: QSvgRenderer
     handle_svg_renderer: QSvgRenderer
     temp_value: int
+    adj_width: int
+    left_pad: int = 5
+    right_pad: int = 21
 
     def __init__(self, slider: QSlider = None, default_value: int = 0, parent=None):
         """
@@ -39,14 +42,15 @@ class SvgSlider(QSlider):
             width = 280
             height = 100
             
-        self.setMinimum(slider_min)
-        self.setMaximum(slider_max)
+        self.setMinimum(slider_min_val)
+        self.setMaximum(slider_max_val)
 
         self.track_svg_renderer = QSvgRenderer(track_path)
         self.handle_svg_renderer = QSvgRenderer(handle_path)
 
         self.temp_value = default_value
-        self.setGeometry(pos_x, pos_y, width, height)
+        self.setGeometry(pos_x, pos_y, width + 10, height)
+        self.adj_width = self.width() - (self.left_pad + self.right_pad)
 
     def paintEvent(self, event):
         painter = QPainter(self)
@@ -56,11 +60,30 @@ class SvgSlider(QSlider):
         track_rect = QRectF(0, self.height() / 2 - 2, self.width(), 16)
         self.track_svg_renderer.render(painter, track_rect)
         
-        handle_rect = QRectF((self.temp_value/100) * self.width() - 8, self.height() / 2 -8, 23, 28)
+        # Draw handle
+        handle_rect = QRectF(self.left_pad + ((self.temp_value/100) * self.adj_width) - 8, self.height() / 2 - 14, 32, 40)
         self.handle_svg_renderer.render(painter, handle_rect)
 
     def sizeHint(self):
         return QSize(600, 90)  # Set a reasonable default size
+    
+    def _normalize_pos(self, pos: int) -> int:
+        """
+        Normalize the mouse position
+
+        Params:
+        pos (int): Position of the mouse on the X axis
+        """
+        normalized_val = round((pos / self.adj_width) * 100)
+
+        # Check that it's between the normalized range specified
+        if normalized_val > slider_max_val:
+            normalized_val = slider_max_val
+        elif normalized_val < slider_min_val:
+            normalized_val = slider_min_val
+
+        return normalized_val
+        
     
     def mousePressEvent(self, event):
         """
@@ -68,12 +91,7 @@ class SvgSlider(QSlider):
         slider value.
         """
         # Calculate position
-        self.temp_value = round((event.pos().x() / self.width()) * 100)
-        # Normalize between bounds
-        if self.temp_value > slider_max:
-            self.temp_value = slider_max
-        elif self.temp_value < slider_min:
-            self.temp_value = slider_min
+        self.temp_value = self._normalize_pos(event.pos().x())
         self.update()
         
     def mouseMoveEvent(self, event):
@@ -81,27 +99,17 @@ class SvgSlider(QSlider):
         Called when mouse is clicked and moved. Updates handle position but
         not the slider value.
         """
-        # Calulcate position
-        self.temp_value = round((event.pos().x() / self.width()) * 100)
-        # Normalize between bounds
-        if self.temp_value > slider_max:
-            self.temp_value = slider_max
-        elif self.temp_value < slider_min:
-            self.temp_value = slider_min 
+        # Calculate position
+        self.temp_value = self._normalize_pos(event.pos().x())
         self.update()
+        print(f"pos: {self.temp_value}")
 
     def mouseReleaseEvent(self, event):
         """
         Called when mouse is released. Updates handle position and slider value
         """
         # Calculate position
-        self.temp_value = round((event.pos().x() / self.width()) * 100)
-        # Normalize between bounds
-        if self.temp_value > slider_max:
-            self.temp_value = slider_max
-        elif self.temp_value < slider_min:
-            self.temp_value = slider_min
-        # Set values
+        self.temp_value = self._normalize_pos(event.pos().x())
         self.setValue(self.temp_value)
         self.update()
         print(self.temp_value)
