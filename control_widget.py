@@ -4,14 +4,16 @@ from PyQt6.QtWidgets import QWidget, QApplication
 from switch_widget import SwitchWidget, Position
 from svg_button_widget import SvgButtonWidget
 from svg_slider import SvgSlider
+from dim_screen import DimScreen
 
 class ControlWidget(QWidget):
 
     id: int
+    dim_screen: DimScreen
     blackout_switch_widget: SwitchWidget
     filter_switch_widget: SwitchWidget
 
-    def __init__(self, skylight_id: int, *args, **kwargs):
+    def __init__(self, skylight_id: int, dim_screen: DimScreen, *args, **kwargs):
         """
         Create a new control widget
 
@@ -25,6 +27,7 @@ class ControlWidget(QWidget):
         
         # Set local variables
         self.id = skylight_id
+        self.dim_screen = dim_screen
 
         # Create switches
         self.blackout_switch_widget = SwitchWidget(Position.CLOSED, self.blackoutSwitch, self)
@@ -35,7 +38,7 @@ class ControlWidget(QWidget):
         # Create buttons
         self.dim_button = SvgButtonWidget('images/dim-icon.svg', self.dimButton, 100, 100, self)
         self.settings_button = SvgButtonWidget('images/settings-icon.svg', self.settingsButton, 100, 100, self)
-        self.dim_button.clicked.connect(self.blackout_switch_widget.disable)
+        self.dim_button.clicked.connect(self.dim_screen_callback)
 
         # Create sliders
         blackout_slider = SvgSlider(self.blackoutSlider, parent=self)
@@ -68,6 +71,9 @@ class ControlWidget(QWidget):
             # Check
             self.filter_switch_widget.checkbox.setChecked(True)
             print("Filter switch checked")
+
+    def dim_screen_callback(self):
+        self.dim_screen.set_screen_dim()
 
 if __name__ == "__main__":
     import sys

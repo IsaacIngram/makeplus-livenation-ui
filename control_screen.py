@@ -5,13 +5,16 @@ from PyQt6.QtGui import QColor
 from tab_bar import TabBar
 from control_widget import ControlWidget
 from navigation import Navigation
+from dim_screen import DimScreen
 
 class ControlScreen(QWidget):
 
     tab_bar: TabBar
+    screen_select: Navigation
+    dim_screen: QWidget
     control_select: Navigation
 
-    def __init__(self, screen_navigation: Navigation, *args, **kwargs):
+    def __init__(self, screen_navigation: Navigation, dim_screen: DimScreen, *args, **kwargs):
         """
         Initialize the ControlScreen. 
 
@@ -23,6 +26,8 @@ class ControlScreen(QWidget):
         # Load UI elements
         uic.loadUi('control_screen.ui', self)
 
+        self.screen_select = screen_navigation
+
         # Create tab bar
         self.tab_bar = TabBar(self.tabBar, self.stackedWidget)
 
@@ -33,21 +38,18 @@ class ControlScreen(QWidget):
         shadow_effect.setOffset(15, 15)
         self.stackedWidget.setGraphicsEffect(shadow_effect)
 
-        self.add_skylight(0, "All")
-        self.add_skylight(1, "Skylight 1")
-        self.add_skylight(2, "Skylight 2")
-        self.add_skylight(3, "Skylight 3")
-        self.add_skylight(4, "Skylight 4")
-        self.add_skylight(5, "Skylight 5")
+        self.add_skylight(0, dim_screen, "All")
+        self.add_skylight(1, dim_screen, "Skylight 1")
+        self.add_skylight(2, dim_screen, "Skylight 2")
+        self.add_skylight(3, dim_screen, "Skylight 3")
+        self.add_skylight(4, dim_screen, "Skylight 4")
+        self.add_skylight(5, dim_screen, "Skylight 5")
 
-
-        # Create a bunch of control widgets, add them to the tab bar
-
-    def add_skylight(self, id, name):
+    def add_skylight(self, id, dim_screen, name):
         """
         Add a skylight to be controlled
         """
-        new_skylight: ControlWidget = ControlWidget(id)
+        new_skylight: ControlWidget = ControlWidget(id, dim_screen)
         self.tab_bar.add_tab(id, new_skylight, name)
 
     def clear_skylights(self):
@@ -55,6 +57,7 @@ class ControlScreen(QWidget):
         Remove all skylights
         """
         #TODO implement
+        pass
 
 if __name__ == "__main__":
     import sys
