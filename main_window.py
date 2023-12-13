@@ -20,7 +20,7 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(main_widget)
 
         # Run frameless and fullscreen if on raspberry pi
-        if platform.system() == "Linux" and "raspberry" in platform.uname().release:
+        if platform.system() == "Linux" and "rpi" in platform.uname().release:
             self.setWindowFlag(Qt.WindowType.Window, True)
             self.setWindowFlag(Qt.WindowType.FramelessWindowHint, True)
             self.showFullScreen()
