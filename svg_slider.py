@@ -102,7 +102,6 @@ class SvgSlider(QSlider):
         # Calculate position
         self.temp_value = self._normalize_pos(event.pos().x())
         self.update()
-        print(f"pos: {self.temp_value}")
 
     def mouseReleaseEvent(self, event):
         """
@@ -112,7 +111,7 @@ class SvgSlider(QSlider):
         self.temp_value = self._normalize_pos(event.pos().x())
         self.setValue(self.temp_value)
         self.update()
-        print(self.temp_value)
+        print(f"set to {self.temp_value}")
 
 if __name__ == '__main__':
     app = QApplication([])

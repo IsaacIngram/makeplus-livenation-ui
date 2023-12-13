@@ -74,7 +74,6 @@ class SwitchWidget(QWidget):
         """
         Callback function for when the switch state is changed
         """
-        print("Switch clicked")
         self.disabled = False
         if self.checkbox.isChecked():
             self.main_svg.load(open_path)

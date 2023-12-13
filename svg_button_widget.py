@@ -42,7 +42,6 @@ class SvgButtonWidget(QWidget):
 
     def mousePressEvent(self, event):
         if self.svg_widget.geometry().contains(event.pos()):
-            print("clicked")
             self.clicked.emit()
         
 
