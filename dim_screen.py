@@ -40,7 +40,8 @@ class DimScreen(QWidget):
         # Switch to dim screen
         self.screen_select.switch_to_page_widget(self)
         # Set display brightness
-        #subprocess.run(["vcgencmd", "display_power", "0"])
+        subprocess.run(["ddcutil", "setvcp", "10", "0", "--bus", "21"])
+
 
     def set_screen_wake(self):
         """
@@ -48,7 +49,8 @@ class DimScreen(QWidget):
         """
         print("Wake screen")
         # Set display brightness
-        #subprocess.run(["vcgencmd", "display_power", "1"])
+        subprocess.run(["ddcutil", "setvcp", "10", "30", "--bus", "21"])
+
         # Switch to control screen
         self.screen_select.switch_to_page_widget(self.control_screen)
 
