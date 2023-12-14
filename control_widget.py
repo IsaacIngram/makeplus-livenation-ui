@@ -36,7 +36,7 @@ class ControlWidget(QWidget):
         self.filter_switch_widget.clicked.connect(self.filter_switch_callback)
 
         # Create buttons
-        self.dim_button = SvgButtonWidget('images/dim-icon.svg', self.dimButton, 100, 100, self)
+        self.dim_button = SvgButtonWidget('images/dim-icon.svg', self.dimButton, 50, 50, self)
         self.settings_button = SvgButtonWidget('images/settings-icon.svg', self.settingsButton, 100, 100, self)
         self.dim_button.clicked.connect(self.dim_screen_callback)
 

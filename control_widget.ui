@@ -108,8 +108,8 @@
   <widget class="QPushButton" name="dimButton">
    <property name="geometry">
     <rect>
-     <x>870</x>
-     <y>0</y>
+     <x>890</x>
+     <y>10</y>
      <width>51</width>
      <height>61</height>
     </rect>

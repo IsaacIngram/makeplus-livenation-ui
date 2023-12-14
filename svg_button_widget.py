@@ -3,7 +3,7 @@ from PyQt6 import QtGui
 from PyQt6.QtWidgets import QPushButton, QWidget, QVBoxLayout
 from PyQt6.QtSvgWidgets import QSvgWidget
 from PyQt6.QtGui import QPainter, QColor, QPen
-from PyQt6.QtCore import Qt, pyqtSignal
+from PyQt6.QtCore import Qt, pyqtSignal, QRect
 
 class SvgButtonWidget(QWidget):
 
@@ -27,12 +27,11 @@ class SvgButtonWidget(QWidget):
 
         # Create button
         self.button = button
-
         self.button.hide()
 
         layout = QVBoxLayout(self)
         layout.addWidget(self.svg_widget, alignment=Qt.AlignmentFlag.AlignHCenter)
-        layout.addWidget(self.button, alignment=Qt.AlignmentFlag.AlignHCenter)
+        #layout.addWidget(self.button, alignment=Qt.AlignmentFlag.AlignHCenter)
         layout.addStretch()
 
         self.original_x = self.button.pos().x()
@@ -41,8 +40,7 @@ class SvgButtonWidget(QWidget):
         self.setGeometry(self.original_x, self.original_y, self.width, self.height)
 
     def mousePressEvent(self, event):
-        if self.svg_widget.geometry().contains(event.pos()):
-            self.clicked.emit()
+        self.clicked.emit()
         
 
     def paintEvent(self, event):
