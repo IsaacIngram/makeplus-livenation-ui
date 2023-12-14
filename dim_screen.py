@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import QWidget
-from PyQt6.QtCore import QEvent
+from PyQt6.QtCore import QEvent, Qt
 from PyQt6 import uic
 from navigation import Navigation
 
@@ -23,6 +23,13 @@ class DimScreen(QWidget):
 
         # Load UI elements
         uic.loadUi('dim_screen.ui', self)
+
+        # Set black background
+        self.setAutoFillBackground(True)
+        palette = self.palette()
+        palette.setColor(self.backgroundRole(), Qt.GlobalColor.black)
+        self.setPalette(palette)
+
 
     def set_control_screen(self, control_screen: QWidget):
         """
