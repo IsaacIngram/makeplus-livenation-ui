@@ -38,6 +38,9 @@ class ControlScreen(QWidget):
         shadow_effect.setOffset(15, 15)
         self.stackedWidget.setGraphicsEffect(shadow_effect)
 
+
+        #TODO replace these "0", "1", etc. with actual skyligths. And all instances
+        # that use this value too
         self.add_skylight(0, dim_screen, "All")
         self.add_skylight(1, dim_screen, "Skylight 1")
         self.add_skylight(2, dim_screen, "Skylight 2")
