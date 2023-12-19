@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# File: skylight_manager.py
+# File: skylight_model.py
 #
 # Author: Isaac Ingram
 #
