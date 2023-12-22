@@ -4,6 +4,7 @@ from PyQt6 import uic
 from navigation import Navigation
 
 import subprocess
+import platform
 
 class DimScreen(QWidget):
     
@@ -46,17 +47,23 @@ class DimScreen(QWidget):
         print("Dim screen")
         # Switch to dim screen
         self.screen_select.switch_to_page_widget(self)
-        # Set display brightness
-        subprocess.run(["ddcutil", "setvcp", "10", "0", "--bus", "21"])
+
+        # Check if running on raspberry pi
+        if platform.system() == "Linux" and "rpi" in platform.uname().release:
+            # Set display brightness
+            subprocess.run(["ddcutil", "setvcp", "10", "0", "--bus", "21"])
 
 
     def set_screen_wake(self):
         """
         Wake the screen
         """
+        # Check if running on raspberry pi
+        if platform.system() == "Linux" and "rpi" in platform.uname().release:
+            # Set display brightness
+            subprocess.run(["ddcutil", "setvcp", "10", "30", "--bus", "21"])
+
         print("Wake screen")
-        # Set display brightness
-        subprocess.run(["ddcutil", "setvcp", "10", "30", "--bus", "21"])
 
         # Switch to control screen
         self.screen_select.switch_to_page_widget(self.control_screen)
