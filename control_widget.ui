@@ -144,6 +144,31 @@
     <string>CheckBox</string>
    </property>
   </widget>
+  <widget class="QLabel" name="connectionIndicator">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>20</y>
+     <width>161</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Live Nation</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string>color: red;</string>
+   </property>
+   <property name="text">
+    <string>Not Connected</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

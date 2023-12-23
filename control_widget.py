@@ -44,6 +44,9 @@ class ControlWidget(QWidget):
         blackout_slider = SvgSlider(self.blackoutSlider, parent=self)
         filter_slider = SvgSlider(self.filterSlider, parent=self)
 
+        # Hide connection indicator
+        self.connectionIndicator.hide()
+
         self.show()
 
     def blackout_switch_callback(self):
@@ -74,6 +77,18 @@ class ControlWidget(QWidget):
 
     def dim_screen_callback(self):
         self.dim_screen.set_screen_dim()
+
+    def show_connection_indicator(self):
+        """
+        Show the not connected indicator
+        """
+        self.connectionIndicator.show()
+
+    def hide_connection_indicator(self):
+        """
+        Jide the not connected indicator
+        """
+        self.connectionIndicator.hide()
 
 if __name__ == "__main__":
     import sys
