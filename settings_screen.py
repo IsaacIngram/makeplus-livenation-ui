@@ -25,12 +25,19 @@ class SettingsScreen(QWidget):
         shadow_effect.setOffset(15, 15)
         self.settingsWidget.setGraphicsEffect(shadow_effect)
 
-        # Create switches
+        # Create buttons
         self.close_button = SvgButtonWidget('images/close-icon.svg', self.closeButton, 50, 50, self)
+        self.close_button.clicked.connect(lambda: self.control_screen.switch_to())
+
+    def set_control_screen(self, control_screen):
+        """
+        Set the control screen the X on the settings screen switches to
+        """
+        self.control_screen = control_screen
 
     def switch_to(self):
         """
         Switch to the settings screen (this screen)
         """
-        print("Switched!!")
         self.screen_select.switch_to_page_widget(self)
+

@@ -24,6 +24,7 @@ class MainWidget(QStackedWidget):
         settings_screen = SettingsScreen(self.screen_select)
         control_screen = ControlScreen(self.screen_select, dim_screen, settings_screen)
         dim_screen.set_control_screen(control_screen)
+        settings_screen.set_control_screen(control_screen)
         self.screen_select.add_page(control_screen)
         self.screen_select.add_page(dim_screen)
         self.screen_select.add_page(settings_screen)
