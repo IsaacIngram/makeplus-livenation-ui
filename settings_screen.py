@@ -2,6 +2,7 @@ from PyQt6 import uic
 from PyQt6.QtWidgets import QWidget, QGraphicsDropShadowEffect
 from PyQt6.QtGui import QColor
 from navigation import Navigation
+from svg_button_widget import SvgButtonWidget
 
 class SettingsScreen(QWidget):
 
@@ -23,6 +24,9 @@ class SettingsScreen(QWidget):
         shadow_effect.setColor(QColor(75, 75, 75, 80))
         shadow_effect.setOffset(15, 15)
         self.settingsWidget.setGraphicsEffect(shadow_effect)
+
+        # Create switches
+        self.close_button = SvgButtonWidget('images/close-icon.svg', self.closeButton, 50, 50, self)
 
     def switch_to(self):
         """
