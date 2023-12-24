@@ -3,6 +3,7 @@ from PyQt6.QtWidgets import QWidget, QGraphicsDropShadowEffect
 from PyQt6.QtGui import QColor
 from navigation import Navigation
 from svg_button_widget import SvgButtonWidget
+from PyQt6.QtCore import Qt
 
 class SettingsScreen(QWidget):
 
@@ -27,6 +28,8 @@ class SettingsScreen(QWidget):
 
         # Create buttons
         self.close_button = SvgButtonWidget('images/close-icon.svg', self.closeButton, 50, 50, self)
+
+        # Bind buttons
         self.close_button.clicked.connect(lambda: self.control_screen.switch_to())
 
     def set_control_screen(self, control_screen):
