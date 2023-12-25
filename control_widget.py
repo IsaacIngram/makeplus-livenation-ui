@@ -5,15 +5,17 @@ from switch_widget import SwitchWidget, Position
 from svg_button_widget import SvgButtonWidget
 from svg_slider import SvgSlider
 from dim_screen import DimScreen
+from settings_screen import SettingsScreen
 
 class ControlWidget(QWidget):
 
     id: int
     dim_screen: DimScreen
+    settings_screen: SettingsScreen
     blackout_switch_widget: SwitchWidget
     filter_switch_widget: SwitchWidget
 
-    def __init__(self, skylight_id: int, dim_screen: DimScreen, *args, **kwargs):
+    def __init__(self, skylight_id: int, dim_screen: DimScreen, settings_screen: SettingsScreen, *args, **kwargs):
         """
         Create a new control widget
 
@@ -28,6 +30,7 @@ class ControlWidget(QWidget):
         # Set local variables
         self.id = skylight_id
         self.dim_screen = dim_screen
+        self.settings_screen = settings_screen
 
         # Create switches
         self.blackout_switch_widget = SwitchWidget(Position.CLOSED, self.blackoutSwitch, self)
@@ -39,10 +42,14 @@ class ControlWidget(QWidget):
         self.dim_button = SvgButtonWidget('images/dim-icon.svg', self.dimButton, 50, 50, self)
         self.settings_button = SvgButtonWidget('images/settings-icon.svg', self.settingsButton, 100, 100, self)
         self.dim_button.clicked.connect(self.dim_screen_callback)
+        self.settings_button.clicked.connect(self.settings_screen_callback)
 
         # Create sliders
         blackout_slider = SvgSlider(self.blackoutSlider, parent=self)
         filter_slider = SvgSlider(self.filterSlider, parent=self)
+
+        # Hide connection indicator
+        self.connectionIndicator.hide()
 
         self.show()
 
@@ -74,6 +81,20 @@ class ControlWidget(QWidget):
 
     def dim_screen_callback(self):
         self.dim_screen.set_screen_dim()
+
+    def show_connection_indicator(self):
+        """
+        Show the not connected indicator
+        """
+        self.connectionIndicator.show()
+
+    def hide_connection_indicator(self):
+        """
+        Jide the not connected indicator
+        """
+        self.connectionIndicator.hide()
+    def settings_screen_callback(self):
+        self.settings_screen.switch_to()
 
 if __name__ == "__main__":
     import sys
