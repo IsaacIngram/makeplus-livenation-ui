@@ -51,6 +51,7 @@ class DimScreen(QWidget):
         # Check if running on raspberry pi
         if platform.system() == "Linux" and "rpi" in platform.uname().release:
             # Set display brightness
+            #TODO make this configurable in config file
             subprocess.run(["ddcutil", "setvcp", "10", "0", "--bus", "21"])
 
 
@@ -61,6 +62,7 @@ class DimScreen(QWidget):
         # Check if running on raspberry pi
         if platform.system() == "Linux" and "rpi" in platform.uname().release:
             # Set display brightness
+            #TODO make this configurable in config file
             subprocess.run(["ddcutil", "setvcp", "10", "30", "--bus", "21"])
 
         print("Wake screen")
