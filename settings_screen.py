@@ -28,6 +28,9 @@ class SettingsScreen(QWidget):
 
         # Create buttons
         self.close_button = SvgButtonWidget('images/close-icon.svg', self.closeButton, 50, 50, self)
+        self.pairButton.clicked.connect(self.pair_button_callback)
+        self.clearButton.clicked.connect(self.clear_button_callback)
+
 
         # Bind buttons
         self.close_button.clicked.connect(lambda: self.control_screen.switch_to())
@@ -44,3 +47,16 @@ class SettingsScreen(QWidget):
         """
         self.screen_select.switch_to_page_widget(self)
 
+    def pair_button_callback(self):
+        """
+        Callback for when pair button is pressed
+        """
+        #TODO implement
+        pass
+
+    def clear_button_callback(self):
+        """
+        Callback for when clear button is pressed
+        """
+        #TODO implement 
+        pass
