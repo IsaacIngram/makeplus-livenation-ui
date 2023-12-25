@@ -8,6 +8,7 @@ from PyQt6.QtCore import Qt
 class SettingsScreen(QWidget):
 
     screen_select: Navigation
+    settings_select: Navigation
 
     def __init__(self, screen_select: Navigation, *args, **kwargs):
         """
@@ -18,6 +19,7 @@ class SettingsScreen(QWidget):
         uic.loadUi('settings_screen.ui', self)
 
         self.screen_select = screen_select
+        self.settings_select = Navigation(self.settingsWidget)
 
         # Apply shadow effect to the right and bottom edges
         shadow_effect = QGraphicsDropShadowEffect(self)
@@ -31,9 +33,12 @@ class SettingsScreen(QWidget):
         self.pairButton.clicked.connect(self.pair_button_callback)
         self.clearButton.clicked.connect(self.clear_button_callback)
 
-
         # Bind buttons
         self.close_button.clicked.connect(lambda: self.control_screen.switch_to())
+        self.cancelPairingButton.clicked.connect(self.cancel_pairing_callback)
+
+        # Add listener for stacked widget being changed
+        self.settingsWidget.currentChanged.connect(self.stacked_widget_change_callback)
 
     def set_control_screen(self, control_screen):
         """
@@ -47,12 +52,24 @@ class SettingsScreen(QWidget):
         """
         self.screen_select.switch_to_page_widget(self)
 
+    def stacked_widget_change_callback(self, index):
+        """
+        Callback function for when the stacked widget index is changed
+
+        Params:
+        index (int): Index switched to
+        """
+        if index == 0:
+            self.close_button.show()
+        else:
+            self.close_button.hide()
+
     def pair_button_callback(self):
         """
         Callback for when pair button is pressed
         """
-        #TODO implement
-        pass
+        self.settings_select.switch_to_page(1)
+        #TODO implement model
 
     def clear_button_callback(self):
         """
@@ -60,3 +77,10 @@ class SettingsScreen(QWidget):
         """
         #TODO implement 
         pass
+
+    def cancel_pairing_callback(self):
+        """
+        Callback function for when the cancel button is pressed
+        """
+        self.settings_select.switch_to_page(0)
+        #TODO implement model
