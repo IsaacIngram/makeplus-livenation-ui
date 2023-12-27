@@ -4,7 +4,9 @@ from PyQt6.QtCore import Qt
 
 from main_widget import MainWidget
 from navigation import Navigation
+import model
 
+import threading
 import platform
 
 class MainWindow(QMainWindow):
@@ -29,4 +31,10 @@ if __name__ == '__main__':
     app = QApplication([])
     window = MainWindow()
     window.show()
+
+    # Create model thread
+    model_thread = threading.Thread(target = lambda: model.main_loop())
+    model_thread.start()
+    
     app.exec()
+    model.signal_stop()

@@ -7,6 +7,7 @@ from control_widget import ControlWidget
 from navigation import Navigation
 from dim_screen import DimScreen
 from settings_screen import SettingsScreen
+import model
 
 class ControlScreen(QWidget):
 
@@ -52,6 +53,7 @@ class ControlScreen(QWidget):
         """
         new_skylight: ControlWidget = ControlWidget(id, dim_screen, settings_screen)
         self.tab_bar.add_tab(id, new_skylight, name)
+        model.add_skylight(name, 0, 0)
 
     def clear_skylights(self):
         """

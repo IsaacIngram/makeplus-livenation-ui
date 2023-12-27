@@ -5,6 +5,8 @@ from navigation import Navigation
 from svg_button_widget import SvgButtonWidget
 from PyQt6.QtCore import Qt
 
+import model
+
 class SettingsScreen(QWidget):
 
     screen_select: Navigation
@@ -69,6 +71,7 @@ class SettingsScreen(QWidget):
         Callback for when pair button is pressed
         """
         self.settings_select.switch_to_page(1)
+        model.enter_pairing_mode()
         #TODO implement model
 
     def clear_button_callback(self):
@@ -83,4 +86,5 @@ class SettingsScreen(QWidget):
         Callback function for when the cancel button is pressed
         """
         self.settings_select.switch_to_page(0)
+        model.enter_normal_mode()
         #TODO implement model
