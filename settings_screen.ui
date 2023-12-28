@@ -29,7 +29,7 @@
 	border-radius: 20px;
 }</string>
    </property>
-   <widget class="QWidget" name="mainPage" native="true">
+   <widget class="QWidget" name="mainPage">
     <widget class="QPushButton" name="closeButton">
      <property name="geometry">
       <rect>
@@ -100,35 +100,63 @@
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>370</x>
-       <y>220</y>
-       <width>221</width>
-       <height>21</height>
+       <x>190</x>
+       <y>60</y>
+       <width>531</width>
+       <height>71</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Live Nation</family>
+       <pointsize>48</pointsize>
+      </font>
+     </property>
      <property name="text">
-      <string>Pairing or something</string>
+      <string>Searching for shades...</string>
      </property>
     </widget>
     <widget class="QPushButton" name="cancelPairingButton">
      <property name="geometry">
       <rect>
-       <x>400</x>
-       <y>330</y>
-       <width>100</width>
-       <height>32</height>
+       <x>390</x>
+       <y>350</y>
+       <width>131</width>
+       <height>51</height>
       </rect>
      </property>
      <property name="styleSheet">
       <string notr="true">QPushButton {
-    color: red;
-    border: 2px solid red;
+    color: rgb(72, 72, 72);
+    border: 2px solid rgb(72, 72, 72);
     border-radius: 10px;
 }
 </string>
      </property>
      <property name="text">
       <string>Cancel</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>180</y>
+       <width>611</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Live Nation</family>
+       <pointsize>18</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>To enter pairing mode, press and hold button on shade until LED starts flashing.</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>
