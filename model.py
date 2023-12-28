@@ -15,6 +15,9 @@ from enum import Enum
 
 class Skylight:
 
+    lock: threading.Lock
+
+    # Data
     id: int
     display_name: str
     target_blackout: float
@@ -31,6 +34,7 @@ class Skylight:
         id (int): id
         """
         self.id = id
+        self.lock = threading.Lock()
         self.display_name = display_name
         self.target_blackout = initial_blackout_val
         self.target_filter = initial_diffuse_val
@@ -43,6 +47,8 @@ class Skylight:
         Returns:
         int: ID
         """
+        with self.lock:
+            return self.id
 
     def get_display_name(self) -> str:
         """
@@ -51,7 +57,8 @@ class Skylight:
         Returns:
         str: The display name of this skylight
         """
-        return self.display_name
+        with self.lock:
+            return self.display_name
     
     def set_blackout(self, val: float) -> None:
         """
@@ -60,7 +67,8 @@ class Skylight:
         Params:
         val (float): Value
         """
-        self.target_blackout = val
+        with self.lock:
+            self.target_blackout = val
 
     def set_filter(self, val: float) -> None:
         """
@@ -69,7 +77,8 @@ class Skylight:
         Params:
         val (float): Value
         """
-        self.target_filter = val
+        with self.lock:
+            self.target_filter = val
 
     def get_blackout(self) -> float:
         """
@@ -78,7 +87,8 @@ class Skylight:
         Returns:
         float: Value
         """
-        return self.actual_blackout
+        with self.lock:
+            return self.actual_blackout
     
     def get_filter(self) -> float:
         """
@@ -87,7 +97,8 @@ class Skylight:
         Returns:
         float: Value
         """
-        return self.actual_filter
+        with self.lock:
+            return self.actual_filter
     
     def _update():
         """
