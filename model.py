@@ -107,13 +107,22 @@ _skylights: [Skylight] = []
 _skylights_lock: threading.Lock = threading.Lock()
 _LOOP_DELAY_MS: float = 100
 
-def add_skylight(display_name: str, initial_blackout_val: float, initial_diffuse_val: float):
+def add_skylight(display_name: str, initial_blackout_val: float, initial_diffuse_val: float) -> Skylight:
     """
     Add a new skylight
+
+    Params:
+    display_name (str): Display name
+    initial_blackout_val (float): Initial blackout value
+    initial_diffuse_val (float): Initial diffuse value
+
+    Returns:
+    Skylight: The Skylight object that was added
     """
     with _skylights_lock:
         skylight = Skylight(len(_skylights), display_name, initial_blackout_val, initial_diffuse_val)
         _skylights.append(skylight)
+    return skylight
 
 def clear_skylights():
     """

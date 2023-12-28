@@ -51,16 +51,10 @@ class ControlScreen(QWidget):
         """
         Add a skylight to be controlled
         """
+        # Add new skylight to model
+        skylight = model.add_skylight(name, 0, 0)
         new_skylight: ControlWidget = ControlWidget(id, dim_screen, settings_screen)
         self.tab_bar.add_tab(id, new_skylight, name)
-        model.add_skylight(name, 0, 0)
-
-    def clear_skylights(self):
-        """
-        Remove all skylights
-        """
-        #TODO implement
-        pass
 
     def switch_to(self):
         """

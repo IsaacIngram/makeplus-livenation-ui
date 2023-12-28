@@ -6,21 +6,24 @@ from svg_button_widget import SvgButtonWidget
 from svg_slider import SvgSlider
 from dim_screen import DimScreen
 from settings_screen import SettingsScreen
+import model
 
 class ControlWidget(QWidget):
 
-    id: int
+    skylight_obj: model.Skylight
     dim_screen: DimScreen
     settings_screen: SettingsScreen
     blackout_switch_widget: SwitchWidget
     filter_switch_widget: SwitchWidget
 
-    def __init__(self, skylight_id: int, dim_screen: DimScreen, settings_screen: SettingsScreen, *args, **kwargs):
+    def __init__(self, skylight_obj: model.Skylight, dim_screen: DimScreen, settings_screen: SettingsScreen, *args, **kwargs):
         """
         Create a new control widget
 
         Params:
-        skylight_id (int): The id of the skylight to control
+        skylight_obj (Skylight): Skylight object
+        dim_screen (DimScreen): Dim screen
+        settings_screen (SettingsScreen): Settings screen
         """
         super().__init__(*args, **kwargs)
 
@@ -28,7 +31,7 @@ class ControlWidget(QWidget):
         uic.loadUi('control_widget.ui', self)
         
         # Set local variables
-        self.id = skylight_id
+        self.skylight_obj = skylight_obj
         self.dim_screen = dim_screen
         self.settings_screen = settings_screen
 
