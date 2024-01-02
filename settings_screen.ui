@@ -164,7 +164,7 @@
     </widget>
    </widget>
    <widget class="QWidget" name="clearPage">
-    <widget class="QPushButton" name="clearToPairButton">
+    <widget class="QPushButton" name="confirmClearButton">
      <property name="geometry">
       <rect>
        <x>300</x>
@@ -182,7 +182,7 @@
 </string>
      </property>
      <property name="text">
-      <string>Pair New Shade</string>
+      <string>Clear All Shades</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_3">
@@ -201,7 +201,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Would you like to pair a new one?</string>
+      <string>Are you sure you would like to remove all shades? This action is irreversible, and all shades must be paired again manually.</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -226,13 +226,13 @@
       </font>
      </property>
      <property name="text">
-      <string>Cleared All Shades</string>
+      <string>Clear All Shades?</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QPushButton" name="exitClearButton">
+    <widget class="QPushButton" name="cancelClearButton">
      <property name="geometry">
       <rect>
        <x>510</x>
