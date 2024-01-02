@@ -111,3 +111,23 @@ class SwitchWidget(QWidget):
             self.main_svg.load(open_disabled_path)
         else:
             self.main_svg.load(closed_disabled_path)
+        self.update()
+
+    def set_open(self):
+        """
+        Set this switch to open.
+        """
+        self.disabled = False
+        self.checkbox.setChecked(True)
+        self.main_svg.load(open_path)
+        self.update()
+
+    def set_closed(self):
+        """
+        Set this switch to closed.
+        """
+        self.disabled = False
+        self.checkbox.setChecked(False)
+        self.main_svg.load(closed_path)
+        self.update()
+

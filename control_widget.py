@@ -15,6 +15,8 @@ class ControlWidget(QWidget):
     settings_screen: SettingsScreen
     blackout_switch_widget: SwitchWidget
     filter_switch_widget: SwitchWidget
+    blackout_slider: SvgSlider
+    filter_slider: SvgSlider
 
     def __init__(self, skylight_obj: model.Skylight, dim_screen: DimScreen, settings_screen: SettingsScreen, *args, **kwargs):
         """
@@ -48,8 +50,8 @@ class ControlWidget(QWidget):
         self.settings_button.clicked.connect(self.settings_screen_callback)
 
         # Create sliders
-        blackout_slider = SvgSlider(self.blackoutSlider, parent=self)
-        filter_slider = SvgSlider(self.filterSlider, parent=self)
+        self.blackout_slider = SvgSlider(self.blackoutSlider, value_update_callback=self.blackout_slider_callback, parent=self)
+        self.filter_slider = SvgSlider(self.filterSlider, value_update_callback=self.filter_slider_callback, parent=self)
 
         # Hide connection indicator
         self.connectionIndicator.hide()
@@ -63,11 +65,10 @@ class ControlWidget(QWidget):
         if self.blackout_switch_widget.checkbox.isChecked():
             # Uncheck
             self.blackout_switch_widget.checkbox.setChecked(False)
-            print("Blackout disabled")
         else:
             # Check
             self.blackout_switch_widget.checkbox.setChecked(True)
-            print("Blackout enabled")
+
 
     def filter_switch_callback(self):
         """
@@ -76,11 +77,10 @@ class ControlWidget(QWidget):
         if self.filter_switch_widget.checkbox.isChecked():
             # Uncheck
             self.filter_switch_widget.checkbox.setChecked(False)
-            print("Filter disabled")
         else:
             # Check
             self.filter_switch_widget.checkbox.setChecked(True)
-            print("Filter enabled")
+
 
     def dim_screen_callback(self):
         self.dim_screen.set_screen_dim()
@@ -99,6 +99,28 @@ class ControlWidget(QWidget):
 
     def settings_screen_callback(self):
         self.settings_screen.switch_to()
+
+    def blackout_slider_callback(self, new_value: int):
+        """
+        Callback function for when the slider value is updated
+        """
+        if new_value == 0:
+            self.blackout_switch_widget.set_closed()
+        elif new_value == 100:
+            self.blackout_switch_widget.set_open()
+        else:
+            self.blackout_switch_widget.disable()
+
+    def filter_slider_callback(self, new_value: int):
+        """
+        Callback function for when the slider value is updated
+        """
+        if new_value == 0:
+            self.filter_switch_widget.set_closed()
+        elif new_value == 100:
+            self.filter_switch_widget.set_open()
+        else:
+            self.filter_switch_widget.disable()
 
 if __name__ == "__main__":
     import sys

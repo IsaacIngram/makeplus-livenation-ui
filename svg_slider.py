@@ -5,6 +5,8 @@ from PyQt6.QtGui import QPainter, QPixmap
 from PyQt6.QtSvg import QSvgRenderer
 from PyQt6.QtCore import Qt, QRectF, QSize
 
+from typing import Callable
+
 handle_path = 'images/slider/handle.svg'
 track_path = 'images/slider/slider.svg'
 slider_max_val: int = 100
@@ -18,14 +20,18 @@ class SvgSlider(QSlider):
     adj_width: int
     left_pad: int = 5
     right_pad: int = 21
+    value_update_callback: Callable[[], None]
 
-    def __init__(self, slider: QSlider = None, default_value: int = 0, parent=None):
+    def __init__(self, slider: QSlider = None, default_value: int = 0, value_update_callback: Callable[[int], None] = None, parent=None):
         """
         Created new SVG Slider
 
         Params:
         slider (QSlider): Optional slider to get geometric data from
         default_value (int): Optional starting value for this slider
+        value_update_callback (Callable[[ControlWidget, int], None]): Optional callback 
+        function for when the value of this slider is updated. Must have a controlwidget
+        to modify and an integer value as the parameters.
         parent: Optional parent of this widget
         """
         super().__init__(parent)
@@ -47,6 +53,8 @@ class SvgSlider(QSlider):
 
         self.track_svg_renderer = QSvgRenderer(track_path)
         self.handle_svg_renderer = QSvgRenderer(handle_path)
+        
+        self.value_update_callback = value_update_callback
 
         self.temp_value = default_value
         self.setGeometry(pos_x, pos_y, width + 10, height)
@@ -111,7 +119,18 @@ class SvgSlider(QSlider):
         self.temp_value = self._normalize_pos(event.pos().x())
         self.setValue(self.temp_value)
         self.update()
-        print(f"set to {self.temp_value}")
+        self.on_value_changed(self.temp_value)
+
+    def on_value_changed(self, new_value: int):
+        """
+        Call the value update callback function provided in the constructor
+        if it exists.
+        
+        Params:
+        new_value (int): New value to pass to the function
+        """
+        if self.value_update_callback is not None:
+            self.value_update_callback(new_value)
 
 if __name__ == '__main__':
     app = QApplication([])
