@@ -65,9 +65,11 @@ class ControlWidget(QWidget):
         if self.blackout_switch_widget.checkbox.isChecked():
             # Uncheck
             self.blackout_switch_widget.checkbox.setChecked(False)
+            self.blackout_slider.set_value(0)
         else:
             # Check
             self.blackout_switch_widget.checkbox.setChecked(True)
+            self.blackout_slider.set_value(100)
 
 
     def filter_switch_callback(self):
@@ -77,9 +79,11 @@ class ControlWidget(QWidget):
         if self.filter_switch_widget.checkbox.isChecked():
             # Uncheck
             self.filter_switch_widget.checkbox.setChecked(False)
+            self.filter_slider.set_value(0)
         else:
             # Check
             self.filter_switch_widget.checkbox.setChecked(True)
+            self.filter_slider.set_value(100)
 
 
     def dim_screen_callback(self):

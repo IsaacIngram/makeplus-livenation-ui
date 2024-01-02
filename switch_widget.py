@@ -105,7 +105,6 @@ class SwitchWidget(QWidget):
         such as interacting with the slider.
         """
         self.disabled = True
-        print("Disabled!!")
         # Make call to state changed callback
         if self.checkbox.isChecked():
             self.main_svg.load(open_disabled_path)

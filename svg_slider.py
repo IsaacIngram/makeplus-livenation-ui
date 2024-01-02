@@ -121,6 +121,18 @@ class SvgSlider(QSlider):
         self.update()
         self.on_value_changed(self.temp_value)
 
+    def set_value(self, value: int):
+        """
+        Manually set slider value
+        """
+        if value > slider_max_val:
+            value = slider_max_val
+        elif value < slider_min_val:
+            value = slider_min_val
+        
+        self.temp_value = value
+        self.update()
+
     def on_value_changed(self, new_value: int):
         """
         Call the value update callback function provided in the constructor
