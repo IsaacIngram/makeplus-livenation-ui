@@ -52,8 +52,8 @@ class ControlScreen(QWidget):
         Add a skylight to be controlled
         """
         # Add new skylight to model
-        skylight = model.add_skylight(name, 0, 0)
         new_skylight: ControlWidget = ControlWidget(id, dim_screen, settings_screen)
+        skylight = model.add_skylight(name, 0, 0, new_skylight.show_connection_indicator, new_skylight.hide_connection_indicator)
         self.tab_bar.add_tab(id, new_skylight, name)
 
     def switch_to(self):

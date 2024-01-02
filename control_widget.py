@@ -93,9 +93,10 @@ class ControlWidget(QWidget):
 
     def hide_connection_indicator(self):
         """
-        Jide the not connected indicator
+        Hide the not connected indicator
         """
         self.connectionIndicator.hide()
+
     def settings_screen_callback(self):
         self.settings_screen.switch_to()
 

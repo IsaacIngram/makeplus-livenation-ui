@@ -12,6 +12,9 @@
 import time
 import threading
 from enum import Enum
+from typing import Callable
+
+connection_timeout_ms: float = 2000 # Consider a skylight dead if heartbeat hasn't been sent in this time (ms)
 
 class Skylight:
 
@@ -24,21 +27,41 @@ class Skylight:
     target_filter: float
     actual_blackout: float
     actual_filter: float
-    last_hb_millis: float # Time of last heartbeat
+    last_hb_ms: float # Time of last heartbeat
 
-    def __init__(self, id: int, display_name: str, initial_blackout_val: float, initial_diffuse_val: float) -> None:
+    # Callback functions
+    not_connected_func: Callable[[], None] # Called when skylight is not connected
+    connected_func: Callable[[], None] # Called when skylight is connected
+
+    def __init__(
+            self, id: int, display_name: str, initial_blackout_val: float, 
+            initial_diffuse_val: float, not_connected_callback: Callable[[], None] = None,
+            connected_callback: Callable[[], None] = None
+            ) -> None:
         """
         Initialize this skylight
 
         Params:
         id (int): id
+        display_name (str): Display name
+        initial_blackout_val (float): Initial blackout value
+        initial_diffuse_val (float): Initial diffuse value
+        not_connected_callback (Callable[[], None]): Optional callback function for when skylight is not connected
+        connected_callback (Callable[[], None]): Optional callback function for when skylight is connected
         """
-        self.id = id
         self.lock = threading.Lock()
-        self.display_name = display_name
-        self.target_blackout = initial_blackout_val
-        self.target_filter = initial_diffuse_val
-        self.last_hb_millis = None
+        with self.lock:
+            self.id = id
+            self.display_name = display_name
+            self.target_blackout = initial_blackout_val
+            self.target_filter = initial_diffuse_val
+            self.last_hb_ms = None
+            self.not_connected_func = not_connected_callback
+            self.connected_func = connected_callback
+            self.connected = False
+            
+            #TODO remove
+            self.last_hb_ms = 0
 
     def get_id(self) -> int:
         """
@@ -47,8 +70,7 @@ class Skylight:
         Returns:
         int: ID
         """
-        with self.lock:
-            return self.id
+        return self.id
 
     def get_display_name(self) -> str:
         """
@@ -57,8 +79,7 @@ class Skylight:
         Returns:
         str: The display name of this skylight
         """
-        with self.lock:
-            return self.display_name
+        return self.display_name
     
     def set_blackout(self, val: float) -> None:
         """
@@ -67,8 +88,7 @@ class Skylight:
         Params:
         val (float): Value
         """
-        with self.lock:
-            self.target_blackout = val
+        self.target_blackout = val
 
     def set_filter(self, val: float) -> None:
         """
@@ -77,8 +97,7 @@ class Skylight:
         Params:
         val (float): Value
         """
-        with self.lock:
-            self.target_filter = val
+        self.target_filter = val
 
     def get_blackout(self) -> float:
         """
@@ -87,8 +106,7 @@ class Skylight:
         Returns:
         float: Value
         """
-        with self.lock:
-            return self.actual_blackout
+        return self.actual_blackout
     
     def get_filter(self) -> float:
         """
@@ -97,14 +115,37 @@ class Skylight:
         Returns:
         float: Value
         """
-        with self.lock:
-            return self.actual_filter
+        return self.actual_filter
+        
+    def execute_connected_func(self) -> None:
+        """
+        Execute the connected callback function if it is set
+        """
+        if self.connected_func is not None:
+            self.connected_func()
+
+    def execute_not_connected_func(self) -> None:
+        """
+        Execute the not connected callback function if it is set
+        """
+        if self.not_connected_func is not None:
+            self.not_connected_func()
     
-    def _update():
+    def _update(self):
         """
-        Update the values of this skylight based on current
+        Update the values of this skylight based on current status. 
+        NOTE: This function handles locking. If this object is already locked,
+        an error message will be printed and this function will return before doing anything.
         """
-        #TODO implement
+        if self.lock.locked():
+            print(f"Error when updating {self} \nAlready locked.")
+            return
+        
+        if time.time() * 1000 > self.last_hb_ms + connection_timeout_ms:
+            self.execute_not_connected_func()
+        else:
+            self.execute_connected_func()
+        
 
 class ControllerModes(Enum):
     NORMAL = 0
@@ -118,7 +159,11 @@ _skylights: [Skylight] = []
 _skylights_lock: threading.Lock = threading.Lock()
 _LOOP_DELAY_MS: float = 100
 
-def add_skylight(display_name: str, initial_blackout_val: float, initial_diffuse_val: float) -> Skylight:
+def add_skylight(
+        display_name: str, initial_blackout_val: float, initial_diffuse_val: float, 
+        not_connected_callback: Callable[[], None] = None, 
+        connected_callback: Callable[[], None] = None
+                 ) -> Skylight:
     """
     Add a new skylight
 
@@ -126,12 +171,14 @@ def add_skylight(display_name: str, initial_blackout_val: float, initial_diffuse
     display_name (str): Display name
     initial_blackout_val (float): Initial blackout value
     initial_diffuse_val (float): Initial diffuse value
+    not_connected_callback (Callable[[], None]): Optional callback function for when skylight is not connected
+        connected_callback (Callable[[], None]): Optional callback function for when skylight is connected
 
     Returns:
     Skylight: The Skylight object that was added
     """
     with _skylights_lock:
-        skylight = Skylight(len(_skylights), display_name, initial_blackout_val, initial_diffuse_val)
+        skylight = Skylight(len(_skylights), display_name, initial_blackout_val, initial_diffuse_val, not_connected_callback, connected_callback)
         _skylights.append(skylight)
     return skylight
 
@@ -186,15 +233,21 @@ def main_loop():
             mode = _controller_mode
 
         if mode == ControllerModes.PAIRING:
+            # Pairing mode
             # TODO implement pairing logic
-            print("Pairing mode...")
+            print("Pairing mode")
+
         else:
             # Normal mode
-            print("Normal mode")
-            with _skylights_lock:
-                for skylight in _skylights:
-                    print(f"\t{skylight.display_name}")
+            # print("Normal mode")
 
+            # Update all skylights
+            with _skylights_lock:
+
+                for skylight in _skylights:
+                    skylight._update()
+
+            
         # Wait for next iteration
         while time.time() < (last_loop_ms + _LOOP_DELAY_MS) / 1000:
             pass
