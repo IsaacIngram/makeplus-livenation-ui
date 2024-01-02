@@ -160,6 +160,97 @@
      </property>
     </widget>
    </widget>
+   <widget class="QWidget" name="clearPage">
+    <widget class="QPushButton" name="clearToPairButton">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>380</y>
+       <width>131</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    color: rgb(72, 72, 72);
+    border: 2px solid rgb(72, 72, 72);
+    border-radius: 10px;
+}
+</string>
+     </property>
+     <property name="text">
+      <string>Pair New Shade</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>240</y>
+       <width>611</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Live Nation</family>
+       <pointsize>18</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Would you like to pair a new one?</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>130</y>
+       <width>531</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Live Nation</family>
+       <pointsize>48</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Cleared All Shades</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="exitClearButton">
+     <property name="geometry">
+      <rect>
+       <x>510</x>
+       <y>380</y>
+       <width>131</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    color: rgb(72, 72, 72);
+    border: 2px solid rgb(72, 72, 72);
+    border-radius: 10px;
+}
+</string>
+     </property>
+     <property name="text">
+      <string>Exit</string>
+     </property>
+    </widget>
+   </widget>
   </widget>
  </widget>
  <resources/>

@@ -38,6 +38,8 @@ class SettingsScreen(QWidget):
         # Bind buttons
         self.close_button.clicked.connect(lambda: self.control_screen.switch_to())
         self.cancelPairingButton.clicked.connect(self.cancel_pairing_callback)
+        self.clearToPairButton.clicked.connect(self.pair_button_callback)
+        self.exitClearButton.clicked.connect(self.exit_clear_callback)
 
         # Add listener for stacked widget being changed
         self.settingsWidget.currentChanged.connect(self.stacked_widget_change_callback)
@@ -78,7 +80,8 @@ class SettingsScreen(QWidget):
         """
         Callback for when clear button is pressed
         """
-        #TODO implement 
+        self.settings_select.switch_to_page(2)
+        #TODO implement model
         pass
 
     def cancel_pairing_callback(self):
@@ -88,3 +91,10 @@ class SettingsScreen(QWidget):
         self.settings_select.switch_to_page(0)
         model.enter_normal_mode()
         #TODO implement model
+
+    def exit_clear_callback(self):
+        """
+        Callback function for when the exit button on the clear page is pressed
+        """
+        self.settings_select.switch_to_page(0)
+
