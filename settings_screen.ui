@@ -125,6 +125,11 @@
        <height>51</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Live Nation</family>
+      </font>
+     </property>
      <property name="styleSheet">
       <string notr="true">QPushButton {
     color: rgb(72, 72, 72);
@@ -172,6 +177,11 @@
        <width>131</width>
        <height>51</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Live Nation</family>
+      </font>
      </property>
      <property name="styleSheet">
       <string notr="true">QPushButton {
@@ -240,6 +250,11 @@
        <width>131</width>
        <height>51</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Live Nation</family>
+      </font>
      </property>
      <property name="styleSheet">
       <string notr="true">QPushButton {
