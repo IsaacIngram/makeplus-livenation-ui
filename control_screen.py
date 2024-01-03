@@ -14,6 +14,7 @@ class ControlScreen(QWidget):
     tab_bar: TabBar
     screen_select: Navigation
     dim_screen: QWidget
+    settings_screen: QWidget
     control_select: Navigation
 
     def __init__(self, screen_navigation: Navigation, dim_screen: DimScreen, settings_screen: SettingsScreen, *args, **kwargs):
@@ -29,6 +30,8 @@ class ControlScreen(QWidget):
         uic.loadUi('control_screen.ui', self)
 
         self.screen_select = screen_navigation
+        self.dim_screen = dim_screen
+        self.settings_screen = settings_screen
 
         # Create tab bar
         self.tab_bar = TabBar(self.tabBar, self.stackedWidget)
@@ -40,21 +43,22 @@ class ControlScreen(QWidget):
         shadow_effect.setOffset(15, 15)
         self.stackedWidget.setGraphicsEffect(shadow_effect)
 
-        self.add_skylight(0, dim_screen, settings_screen, "All")
-        self.add_skylight(1, dim_screen, settings_screen, "Skylight 1")
-        self.add_skylight(2, dim_screen, settings_screen, "Skylight 2")
-        self.add_skylight(3, dim_screen, settings_screen, "Skylight 3")
-        self.add_skylight(4, dim_screen, settings_screen, "Skylight 4")
-        self.add_skylight(5, dim_screen, settings_screen, "Skylight 5")
+        model.model._ui_add_skylight_signal.connect(self.add_skylight)
 
-    def add_skylight(self, id, dim_screen, settings_screen, name):
+    def add_skylight(self, id, name, skylight_model: model.Skylight):
         """
         Add a skylight to be controlled
+
+        Params:
+        id (int): Skylight id
+        name (str): Skylight name
+        skylight_model: Skylight object from the model. Used to set callback functions
         """
         # Add new skylight to model
-        new_skylight: ControlWidget = ControlWidget(id, dim_screen, settings_screen)
-        skylight = model.add_skylight(name, 0, 0, new_skylight.show_connection_indicator, new_skylight.hide_connection_indicator)
-        self.tab_bar.add_tab(id, new_skylight, name)
+        skylight_page: ControlWidget = ControlWidget(id, self.dim_screen, self.settings_screen)
+        skylight_model.set_connected_func(skylight_page.hide_connection_indicator)
+        skylight_model.set_not_connected_func(skylight_page.show_connection_indicator)
+        self.tab_bar.add_tab(id, skylight_page, name)
 
     def switch_to(self):
         """

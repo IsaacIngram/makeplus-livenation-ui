@@ -8,11 +8,20 @@
 # updates their values based on the UI
 #
 ###############################################################################
+from PyQt6.QtCore import pyqtSignal, QObject
 
 import time
 import threading
 from enum import Enum
 from typing import Callable
+
+class ControllerModes(Enum):
+    NORMAL = 0
+    PAIRING = 1
+
+class SkylightStates(Enum):
+    CONNECTED = 0
+    DEAD = 1
 
 connection_timeout_ms: float = 2000 # Consider a skylight dead if heartbeat hasn't been sent in this time (ms)
 
@@ -30,6 +39,7 @@ class Skylight:
     last_hb_ms: float # Time of last heartbeat
 
     # Callback functions
+    #TODO convert these functions to pyqtSignal instead
     not_connected_func: Callable[[], None] # Called when skylight is not connected
     connected_func: Callable[[], None] # Called when skylight is connected
 
@@ -130,6 +140,24 @@ class Skylight:
         """
         if self.not_connected_func is not None:
             self.not_connected_func()
+
+    def set_not_connected_func(self, func: Callable[[], None]) -> None:
+        """
+        Set the function that is called when this skylight is not connected.
+
+        Params:
+        func (Callable[[], None]): Function
+        """
+        self.not_connected_func = func
+
+    def set_connected_func(self, func: Callable[[], None]) -> None:
+        """
+        Set the function that is called when this skylight is connected.
+
+        Params:
+        func (Callable[[], None]): Function
+        """
+        self.connected_func = func
     
     def _update(self):
         """
@@ -146,109 +174,118 @@ class Skylight:
         else:
             self.execute_connected_func()
         
+LOOP_DELAY_MS: float = 200
 
-class ControllerModes(Enum):
-    NORMAL = 0
-    PAIRING = 1
+class Model(QObject):
 
-_controller_mode: ControllerModes = ControllerModes.NORMAL
-_controller_mode_lock: threading.Lock = threading.Lock()
-_signal_end: bool = False
-_signal_end_lock: threading.Lock = threading.Lock()
-_skylights: [Skylight] = []
-_skylights_lock: threading.Lock = threading.Lock()
-_LOOP_DELAY_MS: float = 200
+    _controller_mode: ControllerModes = ControllerModes.NORMAL
+    _controller_mode_lock: threading.Lock = threading.Lock()
+    _signal_end: bool = False
+    _signal_end_lock: threading.Lock = threading.Lock()
+    _skylights: [Skylight] = []
+    _skylights_lock: threading.Lock = threading.Lock()
 
-def add_skylight(
-        display_name: str, initial_blackout_val: float, initial_diffuse_val: float, 
-        not_connected_callback: Callable[[], None] = None, 
-        connected_callback: Callable[[], None] = None
-                 ) -> Skylight:
-    """
-    Add a new skylight
+    _ui_add_skylight_signal = pyqtSignal(int, str, Skylight)
 
-    Params:
-    display_name (str): Display name
-    initial_blackout_val (float): Initial blackout value
-    initial_diffuse_val (float): Initial diffuse value
-    not_connected_callback (Callable[[], None]): Optional callback function for when skylight is not connected
-        connected_callback (Callable[[], None]): Optional callback function for when skylight is connected
+    def add_skylight(
+            self, display_name: str, initial_blackout_val: float, initial_diffuse_val: float, 
+            not_connected_callback: Callable[[], None] = None, 
+            connected_callback: Callable[[], None] = None
+                    ) -> Skylight:
+        """
+        Add a new skylight
 
-    Returns:
-    Skylight: The Skylight object that was added
-    """
-    with _skylights_lock:
-        skylight = Skylight(len(_skylights), display_name, initial_blackout_val, initial_diffuse_val, not_connected_callback, connected_callback)
-        _skylights.append(skylight)
-    return skylight
+        Params:
+        display_name (str): Display name
+        initial_blackout_val (float): Initial blackout value
+        initial_diffuse_val (float): Initial diffuse value
+        not_connected_callback (Callable[[], None]): Optional callback function for when skylight is not connected
+            connected_callback (Callable[[], None]): Optional callback function for when skylight is connected
 
-def clear_skylights():
-    """
-    Clear all skylights
-    """
-    with _skylights_lock:
-        _skylights.clear()
+        Returns:
+        Skylight: The Skylight object that was added
+        """
+        with self._skylights_lock:
 
-def enter_pairing_mode():
-    """
-    Switch to pairing mode
-    """
-    global _controller_mode, _controller_mode_lock, _signal_end, _signal_end_lock
-    with _controller_mode_lock:
-        _controller_mode = ControllerModes.PAIRING
+            id = len(self._skylights)
 
-def enter_normal_mode():
-    """
-    Switch to normal mode
-    """
-    global _controller_mode, _controller_mode_lock, _signal_end, _signal_end_lock
-    with _controller_mode_lock:
-        _controller_mode = ControllerModes.NORMAL
+            skylight = Skylight(id, display_name, initial_blackout_val, initial_diffuse_val, not_connected_callback, connected_callback)
+            self._skylights.append(skylight)
 
-def signal_stop():
-    """
-    Signal to all threads that they should stop
-    """
-    global _signal_end, _signal_end_lock
+        self._ui_add_skylight_signal.emit(id, display_name, skylight)
 
-    with _signal_end_lock:
-        _signal_end = True
+        return skylight
 
-def main_loop():
-    """
-    Main loop responsible for controlling all skylights
-    """
-    global _controller_mode, _controller_mode_lock, _signal_end, _signal_end_lock
-    last_loop_ms: float = time.time()*1000
+    def clear_skylights(self):
+        """
+        Clear all skylights
+        """
+        with self._skylights_lock:
+            self._skylights.clear()
 
-    while True:
+    def enter_pairing_mode(self):
+        """
+        Switch to pairing mode
+        """
+        with self._controller_mode_lock:
+            self._controller_mode = ControllerModes.PAIRING
 
-        # Break out of loop if the end flag was set
-        with _signal_end_lock:
-            if _signal_end:
-                break
+    def enter_normal_mode(self):
+        """
+        Switch to normal mode
+        """
+        with self._controller_mode_lock:
+            self._controller_mode = ControllerModes.NORMAL
 
-        # Store current controller mode
-        with _controller_mode_lock:
-            mode = _controller_mode
+    def signal_stop(self):
+        """
+        Signal to all threads that they should stop
+        """
+        with self._signal_end_lock:
+            self._signal_end = True
 
-        if mode == ControllerModes.PAIRING:
-            # Pairing mode
-            # TODO implement pairing logic
-            print("Pairing mode")
+    def main_loop(self):
+        """
+        Main loop responsible for controlling all skylights
+        """
+        last_loop_ms: float = time.time()*1000
 
-        else:
-            # Normal mode
-            # print("Normal mode")
+        # while self._ui_add_skylight_func is None:
+        #     pass
 
-            # Update all skylights
-            with _skylights_lock:
+        self.add_skylight("Skylight 0", 0, 0)
+        self.add_skylight("Skylight 1", 0, 0)
 
-                for skylight in _skylights:
-                    skylight._update()
+        while True:
 
-            
-        # Wait for next iteration
-        while time.time() < (last_loop_ms + _LOOP_DELAY_MS) / 1000:
-            pass
-        last_loop_ms = time.time() * 1000
+            # Break out of loop if the end flag was set
+            with self._signal_end_lock:
+                if self._signal_end:
+                    break
+
+            # Store current controller mode
+            with self._controller_mode_lock:
+                mode = self._controller_mode
+
+            if mode == ControllerModes.PAIRING:
+                # Pairing mode
+                # TODO implement pairing logic
+                print("Pairing mode")
+
+            else:
+                # Normal mode
+                # print("Normal mode")
+
+                # Update all skylights
+                with self._skylights_lock:
+
+                    for skylight in self._skylights:
+                        skylight._update()
+
+                
+            # Wait for next iteration
+            while time.time() < (last_loop_ms + LOOP_DELAY_MS) / 1000:
+                pass
+            last_loop_ms = time.time() * 1000
+
+model = Model()

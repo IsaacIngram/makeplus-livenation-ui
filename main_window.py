@@ -33,8 +33,8 @@ if __name__ == '__main__':
     window.show()
 
     # Create model thread
-    model_thread = threading.Thread(target = lambda: model.main_loop())
+    model_thread = threading.Thread(target = lambda: model.model.main_loop())
     model_thread.start()
     
     app.exec()
-    model.signal_stop()
+    model.model.signal_stop()
