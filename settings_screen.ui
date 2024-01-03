@@ -243,7 +243,7 @@
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QPushButton" name="confirmCancelButton">
+    <widget class="QPushButton" name="cancelClearButton">
      <property name="geometry">
       <rect>
        <x>550</x>
