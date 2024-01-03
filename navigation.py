@@ -49,7 +49,6 @@ class Navigation():
         """
         all_widgets = [self.stackedWidget.widget(i) for i in range(2, self.stackedWidget.count())]
         for widget in all_widgets:
-            print(widget)
             self.stackedWidget.removeWidget(widget)
             widget.deleteLater()
 
