@@ -156,7 +156,7 @@
      <property name="font">
       <font>
        <family>Live Nation</family>
-       <pointsize>24</pointsize>
+       <pointsize>22</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -185,7 +185,7 @@
      <property name="font">
       <font>
        <family>Live Nation</family>
-       <pointsize>24</pointsize>
+       <pointsize>22</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -259,7 +259,7 @@
      <property name="font">
       <font>
        <family>Live Nation</family>
-       <pointsize>24</pointsize>
+       <pointsize>22</pointsize>
       </font>
      </property>
      <property name="styleSheet">
