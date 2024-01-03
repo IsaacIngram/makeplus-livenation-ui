@@ -54,12 +54,10 @@ class TabBar():
         Clear all tabs
         """
         self.navigation.remove_all()
-        while self.tabs.count():
-            item = self.tabs.takeAt(0)
-            widget = item.widget()
-            if widget:
-                widget.deleteLater()
-            
+        all_widgets = [self.tabs.itemAt(i).widget() for i in range(1, self.tabs.count()) if self.tabs.itemAt(i) is not None]
+        for widget in all_widgets:
+            self.tabs.removeWidget(widget)
+            widget.deleteLater()
 
     def switch_to_tab(self, id: int, widget: QWidget):
         """

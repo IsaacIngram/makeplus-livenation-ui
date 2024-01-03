@@ -47,9 +47,10 @@ class Navigation():
         """
         Remove all widgets from the stacked widget and delete them from memory.
         """
-        all_widgets = [self.stackedWidget.widget(i) for i in range(self.stackedWidget.count())]
+        all_widgets = [self.stackedWidget.widget(i) for i in range(2, self.stackedWidget.count())]
         for widget in all_widgets:
+            print(widget)
             self.stackedWidget.removeWidget(widget)
             widget.deleteLater()
 
-    
+        
