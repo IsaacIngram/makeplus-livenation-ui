@@ -40,6 +40,7 @@ class SettingsScreen(QWidget):
         self.cancelPairingButton.clicked.connect(self.cancel_pairing_callback)
         self.cancelClearButton.clicked.connect(self.cancel_clear_callback)
         self.confirmClearButton.clicked.connect(self.confirm_clear_callback)
+        self.continuePairedButton.clicked.connect(self.continue_paired_callback)
 
         # Add listener for stacked widget being changed
         self.settingsWidget.currentChanged.connect(self.stacked_widget_change_callback)
@@ -73,7 +74,7 @@ class SettingsScreen(QWidget):
         Callback for when pair button is pressed
         """
         self.settings_select.switch_to_page(1)
-        model.enter_pairing_mode()
+        model.model.enter_pairing_mode()
         #TODO implement model
 
     def clear_button_callback(self):
@@ -89,7 +90,7 @@ class SettingsScreen(QWidget):
         Callback function for when the cancel button is pressed
         """
         self.settings_select.switch_to_page(0)
-        model.enter_normal_mode()
+        model.model.enter_normal_mode()
         #TODO implement model
 
     def cancel_clear_callback(self):
@@ -103,6 +104,13 @@ class SettingsScreen(QWidget):
         Callback function for when the confirm button on the clear page is pressed
         """
         model.model.clear_skylights()
+        self.screen_select.switch_to_page(0)
+        self.settings_select.switch_to_page(0)
+
+    def continue_paired_callback(self):
+        """
+        Callback function for when the continue button on the paired page is pressed
+        """
         self.screen_select.switch_to_page(0)
         self.settings_select.switch_to_page(0)
         
