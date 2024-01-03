@@ -102,7 +102,8 @@ class SettingsScreen(QWidget):
         """
         Callback function for when the confirm button on the clear page is pressed
         """
+        model.model.clear_skylights()
         self.screen_select.switch_to_page(0)
         self.settings_select.switch_to_page(0)
-        print("Cleared!!")
+        
 

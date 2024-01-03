@@ -43,7 +43,9 @@ class ControlScreen(QWidget):
         shadow_effect.setOffset(15, 15)
         self.stackedWidget.setGraphicsEffect(shadow_effect)
 
+        # Bind to model
         model.model._ui_add_skylight_signal.connect(self.add_skylight)
+        model.model._ui_clear_skylight_signal.connect(self.clear_skylights)
 
     def add_skylight(self, id, name, skylight_model: model.Skylight):
         """
@@ -59,6 +61,12 @@ class ControlScreen(QWidget):
         skylight_model.set_connected_func(skylight_page.hide_connection_indicator)
         skylight_model.set_not_connected_func(skylight_page.show_connection_indicator)
         self.tab_bar.add_tab(id, skylight_page, name)
+
+    def clear_skylights(self):
+        """
+        Clear all skylights
+        """
+        self.tab_bar.clear_tabs()
 
     def switch_to(self):
         """

@@ -42,5 +42,14 @@ class Navigation():
         int: Index of the new page
         """
         return self.stackedWidget.addWidget(page)
+    
+    def remove_all(self):
+        """
+        Remove all widgets from the stacked widget and delete them from memory.
+        """
+        all_widgets = [self.stackedWidget.widget(i) for i in range(self.stackedWidget.count())]
+        for widget in all_widgets:
+            self.stackedWidget.removeWidget(widget)
+            widget.deleteLater()
 
     

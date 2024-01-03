@@ -49,13 +49,17 @@ class TabBar():
         self.navigation.add_page(widget)
         new_button.clicked.connect(lambda: self.switch_to_tab(id, widget))
         
-
-    def clear_tabs():
+    def clear_tabs(self):
         """
         Clear all tabs
         """
-        #TODO implement
-        pass
+        self.navigation.remove_all()
+        while self.tabs.count():
+            item = self.tabs.takeAt(0)
+            widget = item.widget()
+            if widget:
+                widget.deleteLater()
+            
 
     def switch_to_tab(self, id: int, widget: QWidget):
         """

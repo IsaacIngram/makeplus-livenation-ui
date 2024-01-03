@@ -187,6 +187,7 @@ class Model(QObject):
     _skylights_lock: threading.Lock = threading.Lock()
 
     _ui_add_skylight_signal = pyqtSignal(int, str, Skylight)
+    _ui_clear_skylight_signal = pyqtSignal()
 
     def add_skylight(
             self, display_name: str, initial_blackout_val: float, initial_diffuse_val: float, 
@@ -225,6 +226,7 @@ class Model(QObject):
         """
         Clear all skylights
         """
+        self._ui_clear_skylight_signal.emit()
         with self._skylights_lock:
             self._skylights.clear()
 
