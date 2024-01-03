@@ -96,8 +96,15 @@
         <bold>true</bold>
        </font>
       </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background: transparent;
+    border: none;
+}
+</string>
+      </property>
       <property name="text">
-       <string>Name 1</string>
+       <string/>
       </property>
      </widget>
     </item>
