@@ -175,6 +175,7 @@ class Skylight:
             self.execute_connected_func()
         
 LOOP_DELAY_MS: float = 200
+MAX_NUM_SKYLIGHTS = 7
 
 class Model(QObject):
 
@@ -208,6 +209,10 @@ class Model(QObject):
         with self._skylights_lock:
 
             id = len(self._skylights)
+
+            if id > 7:
+                print("Error: Attempted to add more than max number of skylights (%d)" % MAX_NUM_SKYLIGHTS)
+                return
 
             skylight = Skylight(id, display_name, initial_blackout_val, initial_diffuse_val, not_connected_callback, connected_callback)
             self._skylights.append(skylight)
@@ -250,11 +255,14 @@ class Model(QObject):
         """
         last_loop_ms: float = time.time()*1000
 
-        # while self._ui_add_skylight_func is None:
-        #     pass
-
-        self.add_skylight("Skylight 0", 0, 0)
+        self.add_skylight("All", 0, 0)
         self.add_skylight("Skylight 1", 0, 0)
+        self.add_skylight("Skylight 2", 0, 0)
+        self.add_skylight("Skylight 3", 0, 0)
+        self.add_skylight("Skylight 4", 0, 0)
+        self.add_skylight("Skylight 5", 0, 0)
+        self.add_skylight("Skylight 6", 0, 0)
+        self.add_skylight("Skylight 7", 0, 0)
 
         while True:
 
