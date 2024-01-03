@@ -61,10 +61,6 @@ class SwitchWidget(QWidget):
 
         self.original_pos = self.checkbox.pos()
 
-        print(f"original {self.original_pos.x()}, {self.original_pos.y()}")
-        print(f"new {self.mapFromParent(self.original_pos).x()}, {self.mapFromParent(self.original_pos).y()}")
-
-
         self.setGeometry(
             self.mapFromParent(self.original_pos).x(), 
             self.mapFromParent(self.original_pos).y(),
