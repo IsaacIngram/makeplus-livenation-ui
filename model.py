@@ -157,7 +157,7 @@ _signal_end: bool = False
 _signal_end_lock: threading.Lock = threading.Lock()
 _skylights: [Skylight] = []
 _skylights_lock: threading.Lock = threading.Lock()
-_LOOP_DELAY_MS: float = 100
+_LOOP_DELAY_MS: float = 200
 
 def add_skylight(
         display_name: str, initial_blackout_val: float, initial_diffuse_val: float, 
