@@ -1,5 +1,4 @@
-from PyQt6.QtWidgets import QPushButton, QGraphicsDropShadowEffect
-from PyQt6.QtGui import QColor
+from PyQt6.QtWidgets import QPushButton
 from PyQt6.QtGui import QFont
 
 
@@ -8,8 +7,8 @@ class TabButton(QPushButton):
     def __init__(self, name: str, *args, **kwargs):
         super().__init__(name, *args, **kwargs)
         self.setFont(QFont("Live Nation Regular"))
-        self.setMinimumHeight(60)
-        self.setMaximumHeight(60)
+        self.setMinimumHeight(50)
+        self.setMaximumHeight(50)
         self.setMinimumWidth(100)
         self.setMaximumWidth(951)
         self.setStyleSheet("""
@@ -21,7 +20,7 @@ class TabButton(QPushButton):
                 border-top-right-radius: 0px;
                 border-bottom-left-radius: 20px;
                 border-bottom-right-radius: 20px;
-                padding: 20px;
+                padding-top: 8px;
             }
         """)
 
@@ -35,7 +34,7 @@ class TabButton(QPushButton):
                 border-top-right-radius: 0px;
                 border-bottom-left-radius: 20px;
                 border-bottom-right-radius: 20px;
-                padding: 20px;
+                padding-top: 8px;
             }
         """)
 
@@ -49,6 +48,6 @@ class TabButton(QPushButton):
                 border-top-right-radius: 0px;
                 border-bottom-left-radius: 20px;
                 border-bottom-right-radius: 20px;
-                padding: 20px;
+                padding-top: 8px;
             }
         """)
