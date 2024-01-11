@@ -258,13 +258,13 @@ class Model(QObject):
         last_loop_ms: float = time.time()*1000
 
         self.add_skylight("All", 0, 0)
-        self.add_skylight("Skylight 1", 0, 0)
-        self.add_skylight("Skylight 2", 0, 0)
-        self.add_skylight("Skylight 3", 0, 0)
-        self.add_skylight("Skylight 4", 0, 0)
-        self.add_skylight("Skylight 5", 0, 0)
-        self.add_skylight("Skylight 6", 0, 0)
-        self.add_skylight("Skylight 7", 0, 0)
+        self.add_skylight("Shade 1", 0, 0)
+        self.add_skylight("Shade 2", 0, 0)
+        self.add_skylight("Shade 3", 0, 0)
+        self.add_skylight("Shade 4", 0, 0)
+        self.add_skylight("Shade 5", 0, 0)
+        self.add_skylight("Shade 6", 0, 0)
+        self.add_skylight("Shade 7", 0, 0)
 
         while True:
 
