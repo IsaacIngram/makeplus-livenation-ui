@@ -21,6 +21,8 @@ class TabButton(QPushButton):
                 border-bottom-left-radius: 20px;
                 border-bottom-right-radius: 20px;
                 padding-top: 8px;
+                font-size: 14px;
+                font-family: "Live Nation";
             }
         """)
 
@@ -35,6 +37,8 @@ class TabButton(QPushButton):
                 border-bottom-left-radius: 20px;
                 border-bottom-right-radius: 20px;
                 padding-top: 8px;
+                font-size: 14px;
+                font-family: "Live Nation";
             }
         """)
 
@@ -49,5 +53,7 @@ class TabButton(QPushButton):
                 border-bottom-left-radius: 20px;
                 border-bottom-right-radius: 20px;
                 padding-top: 8px;
+                font-size: 14px;
+                font-family: "Live Nation";
             }
         """)
